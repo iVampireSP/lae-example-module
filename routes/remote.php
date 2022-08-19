@@ -11,3 +11,24 @@ Route::get('remote', Remote\RemoteController::class);
 Route::resource('hosts', Remote\HostController::class);
 Route::resource('work-orders', Remote\WorkOrder\WorkOrderController::class);
 Route::resource('work-orders.replies', Remote\WorkOrder\ReplyController::class);
+
+
+/**
+ * Export functions
+ * 导出函数，提供给用户访问。
+ * 所有方法都必须使用 POST 请求。
+ */
+
+// Host 函数，比如控制服务器的启停
+Route::group(['prefix' => 'hosts/{host}/functions'], function () {
+    Route::post('/test', function () {
+        return ['test'];
+    });
+});
+
+// Module 函数，比如修改用户在此模块的信息
+Route::group(['prefix' => '/functions'], function () {
+    Route::post('/module_func', function () {
+        return ['module_func'];
+    });
+});
