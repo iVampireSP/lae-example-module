@@ -17,6 +17,9 @@ class Remote
      */
     public function handle(Request $request, Closure $next)
     {
+        // add json header
+        $request->headers->set('Accept', 'application/json');
+
         if (!$request->hasHeader('X-Remote-Api-Token')) {
             return $this->unauthorized();
         }
