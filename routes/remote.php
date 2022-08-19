@@ -6,4 +6,6 @@ use App\Http\Controllers\Remote;
 
 // Remote routes
 
-Route::apiResource('remote', Remote\RemoteController::class);
+Route::get('remote', Remote\RemoteController::class);
+
+Route::resource('hosts', Remote\HostController::class);
