@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Remote\WorkOrder;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\WorkOrder\Reply;
-use App\Http\Controllers\Controller;
+use App\Models\WorkOrder\WorkOrder;
 
-class ReplyController extends Controller
+class WorkOrderController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,6 +13,18 @@ class ReplyController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
+    {
+        //
+        $workOrders = WorkOrder::with('client')->simplePaginate(10);
+        return view('workOrders.index', compact('workOrders'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
     {
         //
     }
@@ -26,15 +37,7 @@ class ReplyController extends Controller
      */
     public function store(Request $request)
     {
-        // store
-        $reply = new Reply();
-        $reply->work_order_id = $request->work_order_id;
-        $reply->content = $request->content;
-        $reply->save();
-
-        // return
-        return $this->created($reply);
-        
+        //
     }
 
     /**
@@ -44,6 +47,17 @@ class ReplyController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
     {
         //
     }

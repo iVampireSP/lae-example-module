@@ -28,8 +28,8 @@ return new class extends Migration
             $table->foreign('work_order_id')->references('id')->on('work_orders')->onDelete('cascade');
 
             // user id
-            $table->unsignedBigInteger('client_id')->index();
-            $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade');
+            // $table->unsignedBigInteger('client_id')->index();
+            // $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade');
 
             
             $table->boolean('is_pending')->default(false)->index();

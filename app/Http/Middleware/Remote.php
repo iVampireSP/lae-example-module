@@ -2,9 +2,10 @@
 
 namespace App\Http\Middleware;
 
-use App\Models\Client;
 use Closure;
+use App\Models\Client;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
 class Remote
 {
@@ -42,6 +43,7 @@ class Remote
             // find or create client
             if (!$client) {
                 $client = Client::create([
+                    'id' => $remote_user['id'],
                     'name' => $remote_user['name'],
                     'email' => $remote_user['email'],
                 ]);
@@ -59,6 +61,20 @@ class Remote
             // add client to request
             $request->merge(['client' => $client]);
         }
+
+        if ($request->has('user_id')) {
+            $request->merge([
+                'client_id' => $request->user_id,
+            ]);
+        }
+
+
+        // created_at and updated_at 序列化
+        $request->merge([
+            'created_at' => Carbon::parse($request->created_at)->toDateTimeString(),
+            'updated_at' => Carbon::parse($request->updated_at)->toDateTimeString(),
+        ]);
+
 
         return $next($request);
     }

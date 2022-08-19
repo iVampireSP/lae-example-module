@@ -15,11 +15,14 @@ class Reply extends Model
         'id',
         'content',
         'work_order_id',
-        // 'user_id',
+        'client_id',
         'is_pending',
+        'created_at',
+        'updated_at',
     ];
 
     public $incrementing = false;
+    public $timestamps = false;
 
 
     public function workOrder()

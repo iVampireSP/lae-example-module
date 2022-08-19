@@ -35,6 +35,7 @@ class RouteServiceProvider extends ServiceProvider
 
             Route::middleware(['api', 'remote'])
                 ->prefix('remote')
+                ->as('remote.')
                 ->group(base_path('routes/remote.php'));
 
 

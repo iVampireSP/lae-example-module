@@ -21,11 +21,14 @@ class Host extends Model
         'price',
         'configuration',
         'status',
+        'created_at',
+        'updated_at',
     ];
 
     // stop auto increment
     public $incrementing = false;
-
+    public $timestamps = false;
+    
     protected $casts = [
         'configuration' => 'array'
     ];

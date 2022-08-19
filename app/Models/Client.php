@@ -11,7 +11,14 @@ class Client extends Model
 
     // fillable
     protected $fillable = [
+        'id',
         'name',
         'email',
+        'created_at',
+        'updated_at',
     ];
+
+    // auto increment
+    public $incrementing = false;
+    public $timestamps = false;
 }

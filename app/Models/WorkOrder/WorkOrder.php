@@ -2,6 +2,7 @@
 
 namespace App\Models\WorkOrder;
 
+use App\Models\Client;
 use App\Models\Host;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -19,9 +20,14 @@ class WorkOrder extends Model
         'host_id',
         'client_id',
         'status',
+        'created_at',
+        'updated_at',
     ];
 
     public $incrementing = false;
+
+    // 取消自动管理 timestamp
+    public $timestamps = false;
 
 
     // replies
@@ -36,9 +42,9 @@ class WorkOrder extends Model
         return $this->belongsTo(Host::class);
     }
 
-    public function scopeClient($query)
+    public function client()
     {
-        return $query->where('client_id', auth()->id());
+        return $this->belongsTo(Client::class);
     }
 
     // on createing
@@ -52,5 +58,4 @@ class WorkOrder extends Model
             }
         });
     }
-
 }

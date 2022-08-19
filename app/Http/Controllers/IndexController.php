@@ -33,4 +33,10 @@ class IndexController extends Controller
         }
     }
 
+    public function logout() {
+        // logout
+        Auth::logout();
+        return redirect()->route('login');
+    }
+
 }

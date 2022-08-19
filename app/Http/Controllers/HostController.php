@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Host;
 use Illuminate\Http\Request;
 
 class HostController extends Controller
@@ -14,6 +15,9 @@ class HostController extends Controller
     public function index()
     {
         //
+        $hosts = Host::with('client')->simplePaginate(10);
+
+        return view('hosts.index', compact('hosts'));
     }
 
     /**

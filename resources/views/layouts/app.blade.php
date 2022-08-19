@@ -6,11 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+
     <title>{{ config('app.name', 'LAE') }}</title>
 </head>
 
 <body>
-    <h3>{{ config('remote.module_name') }} 后台</h3>
+    <h3 style="text-align: center">{{ config('remote.module_name') }} 后台</h3>
+    {{-- 顶部横向菜单 --}}
+    <div class="top-menu">
+        <ul>
+            <li><a href="{{ route('clients.index') }}">已经发现的客户</a></li>
+            <li><a href="{{ route('hosts.index') }}">主机</a></li>
+            <li><a href="{{ route('servers.index') }}">服务器</a></li>
+            <li><a href="{{ route('work-orders.index') }}">工单</a></li>
+            <li><a href="{{ route('logout') }}">退出</a></li>
+        </ul>
+    </div>
     {{-- display error --}}
     @if ($errors->any())
         <div>
