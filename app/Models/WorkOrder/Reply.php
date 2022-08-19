@@ -2,6 +2,7 @@
 
 namespace App\Models\WorkOrder;
 
+use App\Models\Client;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -28,6 +29,11 @@ class Reply extends Model
     public function workOrder()
     {
         return $this->belongsTo(WorkOrder::class);
+    }
+
+    public function client()
+    {
+        return $this->belongsTo(Client::class);
     }
 
     public function scopeWorkOrderId($query, $work_order_id)

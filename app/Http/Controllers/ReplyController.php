@@ -3,28 +3,20 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\WorkOrder\Reply;
 use App\Models\WorkOrder\WorkOrder;
 use Illuminate\Support\Facades\Http;
 
-class WorkOrderController extends Controller
+class ReplyController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
         //
-        $workOrders = WorkOrder::with('client');
-
-
-        $workOrders = $workOrders->where('status', $request->status ?? 'open');
-
-        $workOrders = $workOrders->simplePaginate(10);
-
-
-        return view('workOrders.index', compact('workOrders'));
     }
 
     /**
@@ -43,9 +35,34 @@ class WorkOrderController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, WorkOrder $work_order, Reply $reply)
     {
-        //
+        $request->validate([
+            'content' => 'required|string',
+        ]);
+
+        // push to remote
+        $http = Http::remote('remote')->asForm();
+
+        // dd([
+        //     'content' => $request->content,
+        //     'work_order_id' => $work_order->id,
+        // ]);
+
+        // dd($http);
+
+        $http = $http->post('work-orders/' . $work_order->id . '/replies', [
+            'content' => $request->content,
+            'work_order_id' => $work_order->id,
+        ]);
+
+        if ($http->successful()) {
+            return redirect()->route('work-orders.show', $work_order)->with('success', '回复已经上传，请等待同步。');
+        } else {
+            return redirect()->route('work-orders.show', $work_order->id)->with('error', 'Reply could not be created');
+        }
+
+
     }
 
     /**
@@ -54,27 +71,9 @@ class WorkOrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request, WorkOrder $work_order)
+    public function show($id)
     {
-
-        $request->validate([
-            'status' => 'sometimes|in:closed,on_hold,in_progress',
-        ]);
-
-        $http = Http::remote('remote')->asForm();
-
-
-        $http = $http->patch('work-orders/' . $work_order->id, [
-            'status' => $request->status,
-        ]);
-
-        $work_order->load(['replies', 'client']);
         //
-
-        $client = $work_order->client;
-
-
-        return view('workOrders.show', compact('work_order', 'client'));
     }
 
     /**
@@ -92,12 +91,12 @@ class WorkOrderController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  WorkOrder $work_order
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, WorkOrder $work_order)
+    public function update(Request $request, $id)
     {
-    //   
+        //
     }
 
     /**

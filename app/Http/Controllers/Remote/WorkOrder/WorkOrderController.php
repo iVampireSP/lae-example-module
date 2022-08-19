@@ -53,12 +53,16 @@ class WorkOrderController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  WorkOrder  $work_order
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, WorkOrder $work_order)
     {
         //
+
+        $work_order->update($request->all());
+
+        return $this->updated($work_order);
     }
 
     /**

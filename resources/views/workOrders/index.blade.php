@@ -1,6 +1,17 @@
 <x-app-layout>
     <h1>工单</h1>
 
+    {{-- 筛选 --}}
+    <a href="?status=open">开启的工单</a>
+    <a href="?status=user_read">用户已读</a>
+    <a href="?status=replied">已回复</a>
+    <a href="?status=user_replied">用户已回复</a>
+    <a href="?status=read">您已读</a>
+    <a href="?status=on_hold">挂起</a>
+    <a href="?status=in_progress">正在处理</a>
+    
+    <a href="?status=closed">已关闭</a>
+
     <table>
         <thead>
             <tr>
@@ -21,7 +32,7 @@
                     <td><a href="{{ route('work-orders.show', $workOrder->id) }}">{{ $workOrder->id }}</a></td>
                     <td><a href="{{ route('work-orders.show', $workOrder->id) }}">{{ $workOrder->title }}</a></td>
                     <td>{{ $workOrder->client->name }}</td>
-                    <td>{{ $workOrder->status}}</td>
+                    <td>{{ $workOrder->status }}</td>
                     <td>{{ $workOrder->created_at }}</td>
                     <td>{{ $workOrder->updated_at }}</td>
 
