@@ -9,3 +9,5 @@ use App\Http\Controllers\Remote;
 Route::get('remote', Remote\RemoteController::class);
 
 Route::resource('hosts', Remote\HostController::class);
+Route::resource('work-orders', Remote\WorkOrder\WorkOrderController::class);
+Route::resource('work-orders.replies', Remote\WorkOrder\ReplyController::class);

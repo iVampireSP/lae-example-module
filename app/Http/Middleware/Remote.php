@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Client;
 use Closure;
 use Illuminate\Http\Request;
 
@@ -23,6 +24,37 @@ class Remote
         $token = $request->header('X-Remote-Api-Token');
         if ($token !== config('remote.api_token')) {
             return $this->unauthorized();
+        }
+
+        $request->merge([
+            'upstream_id' => $request->id,
+        ]);
+
+
+        // if request has user
+        if ($request->user) {
+            $remote_user = $request->toArray()['user'];
+            // find client if exists
+            $client = Client::where('email', $remote_user['email'])->first();
+            // find or create client
+            if (!$client) {
+                $client = Client::create([
+                    'name' => $remote_user['name'],
+                    'email' => $remote_user['email'],
+                ]);
+            }
+
+            // $request->client_id = $remote_user['id'];
+
+            // map $request->user_id to $request->client_id
+            $request->merge([
+                'client_id' => $client->id,
+            ]);
+
+            unset($request->user);
+
+            // add client to request
+            $request->merge(['client' => $client]);
         }
 
         return $next($request);

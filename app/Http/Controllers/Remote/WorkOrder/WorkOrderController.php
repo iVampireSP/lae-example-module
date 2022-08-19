@@ -1,27 +1,41 @@
 <?php
 
-namespace App\Http\Controllers\Remote;
+namespace App\Http\Controllers\Remote\WorkOrder;
 
-use App\Http\Controllers\Controller;
 use App\Models\Host;
 use Illuminate\Http\Request;
+use App\Models\WorkOrder\WorkOrder;
 use Illuminate\Support\Facades\Log;
+use App\Http\Controllers\Controller;
 
-class HostController extends Controller
+class WorkOrderController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
         //
     }
 
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function store(Request $request)
     {
-        $request->upstream_id = $request->id;
+        // dd($request->all());
 
-        $host = Host::create($request->all());
+        // find host
+        // $host = Host::where('upstream_id', $request->upstream_id);
 
-        return $this->created($host);
+        $workOrder = WorkOrder::create($request->all());
 
+        return $this->success($workOrder);
     }
 
     /**
@@ -44,17 +58,7 @@ class HostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // patch
-        $host = Host::where('upstream_id', $id);
-
-        switch ($request->type) {
-            case 'suspend':
-                $host->update($request->all());
-                break;
-            case 'unsuspend':
-                $host->update($request->all());
-                break;
-        }
+        //
     }
 
     /**
@@ -65,8 +69,6 @@ class HostController extends Controller
      */
     public function destroy($id)
     {
-        // patch
-        $host = Host::where('upstream_id', $id);
-        $host->delete();
+        //
     }
 }
