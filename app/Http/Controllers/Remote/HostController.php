@@ -21,7 +21,6 @@ class HostController extends Controller
         $host = Host::create($request->all());
 
         return $this->created($host);
-
     }
 
     /**
@@ -39,19 +38,26 @@ class HostController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  Host $host
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Host $host)
     {
         // patch
-        $host = Host::where('upstream_id', $id);
-
-        switch ($request->type) {
-            case 'suspend':
+        switch ($request->status) {
+            case 'running':
+                // 当启动或解除暂停时
                 $host->update($request->all());
                 break;
-            case 'unsuspend':
+
+            case 'stopped':
+                // 当停止时（一般用于关机）
+                $host->update($request->all());
+                break;
+
+            case 'suspended':
+                // 执行暂停操作，然后标记为暂停状态
+
                 $host->update($request->all());
                 break;
         }

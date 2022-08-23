@@ -68,6 +68,11 @@ class WorkOrderController extends Controller
             'status' => $request->status,
         ]);
 
+        // if has status
+        if ($request->has('status')) {
+            return back();
+        }
+
         $work_order->load(['replies', 'client']);
         //
 
