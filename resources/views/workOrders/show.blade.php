@@ -31,7 +31,7 @@
     <form method="POST" action="{{ route('work-orders.replies.store', $work_order->id) }}">
         @csrf
 
-        <textarea name="content" placeholder="您的回复"></textarea>
+        <textarea name="content" placeholder="您的回复" rows="10" cols="50"></textarea>
 
         <button type="submit">提交</button>
     </form>

@@ -66,13 +66,17 @@ class HostController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  Host $host
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Host $host)
     {
-        // patch
-        $host = Host::where('upstream_id', $id);
+        // 具体删除逻辑
+
+        // 比如销毁硬盘，踢掉用户等。   
         $host->delete();
+
+
+        return $this->deleted($host);
     }
 }

@@ -88,7 +88,6 @@ class HostController extends Controller
         }
 
 
-
         $this->http->patch('hosts/' . $host->id, [
             'status' => $request->status,
         ]);
@@ -104,18 +103,11 @@ class HostController extends Controller
      */
     public function destroy(Host $host)
     {
-        // 销毁服务器
+        // 销毁前的逻辑
+        
+        // 发送到 LAE, 收到回调后到 Remote\HostController@destory 这里编写销毁逻辑。
+        $this->http->delete('hosts/' . $host->id);
 
-        // 这里的销毁是 本程序执行销毁操作，随后再发送到 LAE。
-        // 而 LAE 的销毁是通过 API 来调用 本程序 Remote\HostController@destory 的销毁操作。
-        // 他们都是销毁，但是位置不一样。
-
-        $host->delete();
-
-
-        // 发送到 LAE 销毁服务器
-        $http = Http::remote('remote')->asForm();
-
-        return back();
+        return back()->with('success', '已开始销毁。');
     }
 }
