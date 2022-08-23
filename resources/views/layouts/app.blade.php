@@ -27,15 +27,15 @@
 
     {{-- if has success --}}
     @if (session('success'))
-        <div class="alert alert-success">
+        <p style="color: green">
             {{ session('success') }}
-        </div>
+        </p>
     @endif
 
     @if (session('error'))
-        <div class="alert alert-danger">
+        <p style="color: red">
             {{ session('error') }}
-        </div>
+        </p>
     @endif
 
     @if ($errors->any())

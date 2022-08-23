@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Server;
 use Illuminate\Http\Request;
 
 class ServerController extends Controller
@@ -14,6 +15,9 @@ class ServerController extends Controller
     public function index()
     {
         //
+        $servers = Server::simplePaginate(10);
+
+        return view('servers.index', compact('servers'));
     }
 
     /**
@@ -24,6 +28,7 @@ class ServerController extends Controller
     public function create()
     {
         //
+        return view('servers.create');
     }
 
     /**
@@ -35,50 +40,75 @@ class ServerController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'name' => 'required',
+            'fqdn' => 'required',
+            'port' => 'required',
+            'status' => 'required',
+        ]);
+
+        Server::create($request->all());
+
+        return redirect()->route('servers.index')->with('success', '服务器成功添加。');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  Server $server
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Server $server)
     {
         //
+        return view('servers.show', compact('server'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  Server $server
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Server $server)
     {
         //
+        return view('servers.edit', compact('server'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  Server $server
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Server $server)
     {
         //
+        // $request->validate([
+        //     'name' => 'required',
+        //     'fqdn' => 'required',
+        //     'port' => 'required',
+        //     'status' => 'required',
+        // ]);
+
+        $server->update($request->all());
+
+        return redirect()->route('servers.index')->with('success', '服务器成功更新。');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  Server $server
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Server $server)
     {
         //
+        $server->delete();
+
+        return redirect()->route('servers.index')->with('success', '服务器成功删除。');
     }
 }
