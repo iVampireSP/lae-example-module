@@ -16,4 +16,10 @@
         {{-- submit --}}
         <input type="submit" value="修改" />
     </form>
+
+    {{-- read from yaml --}}
+    <textarea>
+        {{-- get from storage --}}
+        
+    </textarea>
 </x-app-layout>

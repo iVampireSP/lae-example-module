@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Product;
 use App\Http\Controllers\Controller;
 use App\Models\Product\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -65,6 +66,14 @@ class ProductController extends Controller
     public function show(Product $product)
     {
         //
+
+        // get from storage
+        $yaml = Storage::get('products/'. $product->id);
+
+        // convert yaml to json
+        // $json = yaml_parse($yaml);
+
+
         return view('products.show', compact('product'));
 
     }
