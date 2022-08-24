@@ -26,13 +26,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('hosts', HostController::class);
     Route::resource('work-orders', WorkOrderController::class);
     Route::resource('work-orders.replies', ReplyController::class);
-    Route::resource('products', ProductController::class);
-    // Route::resource('configurable-options', ConfigurableOptionController::class);
-    Route::resource(
-        'configurable-option-groups',
-        ConfigurableOptionGroupController::class
-    );
-    Route::resource('configurable-option-groups.options', ConfigurableOptionController::class);
+    // Route::resource('products', ProductController::class);
+    // // Route::resource('configurable-options', ConfigurableOptionController::class);
+    // Route::resource(
+    //     'configurable-option-groups',
+    //     ConfigurableOptionGroupController::class
+    // );
+    // Route::resource('configurable-option-groups.options', ConfigurableOptionController::class);
 
 
 
