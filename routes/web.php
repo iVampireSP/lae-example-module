@@ -3,10 +3,13 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HostController;
 use App\Http\Controllers\IndexController;
-use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ReplyController;
+use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ServerController;
 use App\Http\Controllers\WorkOrderController;
+use App\Http\Controllers\Product\ProductController;
+use App\Http\Controllers\Product\ConfigurableOptionController;
+use App\Http\Controllers\Product\ConfigurableOptionGroupController;
 
 Route::view('/login', 'login')->name('login');
 Route::post('/login', [IndexController::class, 'login']);
@@ -23,6 +26,14 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('hosts', HostController::class);
     Route::resource('work-orders', WorkOrderController::class);
     Route::resource('work-orders.replies', ReplyController::class);
+    Route::resource('products', ProductController::class);
+    // Route::resource('configurable-options', ConfigurableOptionController::class);
+    Route::resource(
+        'configurable-option-groups',
+        ConfigurableOptionGroupController::class
+    );
+    Route::resource('configurable-option-groups.options', ConfigurableOptionController::class);
+
 
 
 
