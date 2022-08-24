@@ -74,6 +74,10 @@ class ConfigurableOptionGroupController extends Controller
     public function edit(ConfigurableOptionGroup $configurableOptionGroup)
     {
         //
+
+        // load option
+        // $configurableOptionGroup->load('configurableOption');
+        
         return view('products.configurable_options.groups.edit', compact('configurableOptionGroup'));
     }
 

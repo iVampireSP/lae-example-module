@@ -37,9 +37,20 @@ class ConfigurableOptionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, ConfigurableOptionGroup $configurableOptionGroup)
     {
         //
+        $request->validate([
+            'name' => 'required',
+            'display_name' => 'required',
+            'description' => 'required',
+            'is_hidden' => 'boolean',
+            'type' => 'string|in:text,dropdown,boolean,quantity,checkbox',
+
+
+            // 验证 regex 是否是正则表达式
+            'regex' => 'string|regex:/^\/.*\/[gimuy]*$/',
+        ]);
     }
 
     /**

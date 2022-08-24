@@ -21,8 +21,8 @@ class ConfigurableOptionGroup extends Model
         return $this->belongsToMany(Product::class);
     }
 
-    public function configOptions()
+    public function configurableOption()
     {
-        return $this->hasMany(ConfigOption::class);
+        return $this->hasMany(ConfigurableOption::class, 'group_id');
     }
 }

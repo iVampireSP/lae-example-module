@@ -24,8 +24,11 @@ return new class extends Migration
             // 是否隐藏
             $table->boolean('is_hidden')->default(false);
 
-            // 类型(Dropdown 下拉菜单, Radio 单选按钮, Boolean 是否，Quantity 数量))，默认为Dropdown
+            // 类型(Text 文本输入, Dropdown 下拉菜单, Radio 单选按钮, Boolean 是否，Quantity 数量))，默认为Dropdown
             $table->string('type')->default('dropdown');
+
+            // 如果类型是 Text，则可以写正则表达式
+            $table->string('regex')->nullable();
 
             // 最小数量
             $table->integer('min_qty')->default(0);
@@ -66,6 +69,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('config_options');
+        Schema::dropIfExists('product_configurable_options');
     }
 };
