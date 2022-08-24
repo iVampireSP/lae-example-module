@@ -1,6 +1,6 @@
 <x-app-layout>
-    <h1>产品组</h1>
-    <a href="{{ route('configurable-option-groups.create') }}">新产品组</a>
+    <h1>可配置选项组</h1>
+    <a href="{{ route('configurable-option-groups.create') }}">新可配置选项组</a>
 
 
     <table>

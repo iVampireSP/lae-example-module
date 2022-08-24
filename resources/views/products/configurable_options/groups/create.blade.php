@@ -1,5 +1,5 @@
 <x-app-layout>
-    <h1>新产品组</h1>
+    <h1>新的可配置选项组</h1>
 
     <form method="POST" action="{{ route('configurable-option-groups.store') }}">
         @csrf
