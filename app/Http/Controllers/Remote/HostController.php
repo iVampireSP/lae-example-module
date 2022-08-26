@@ -9,29 +9,57 @@ use Illuminate\Support\Facades\Log;
 
 class HostController extends Controller
 {
-    public function index()
-    {
-        //
-    }
-
     public function store(Request $request)
     {
-        $request->upstream_id = $request->id;
+        // 创建云端任务(告知用户执行情况)
+
+        $task = $this->http->asForm()->post('/tasks', [
+            'title' => '正在寻找服务器',
+            'host_id' => $request->id,
+            'status' => 'processing',
+        ])->json();
+
+        Log::debug($task['data']);
+        // 寻找服务器的逻辑
+
+        $task_id = $task['data']['id'];
+
+        $this->http->asForm()->patch('/tasks/' . $task_id, [
+            'title' => '已找到服务器',
+        ]);
+
+
+        $this->http->asForm()->patch('/tasks/' . $task_id, [
+            'title' => '正在创建您的服务。',
+        ]);
 
         $host = Host::create($request->all());
+
+
+        $this->http->asForm()->patch('/tasks/' . $task_id, [
+            'title' => '已完成创建。',
+            'status' => 'success',
+        ]);
+
+        // 将 price 添加到 host
+        $host->price = 1002;
 
         return $this->created($host);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function calculatePrice(Request $request)
     {
-        //
+        // return
+
+        // 如果参数正确
+        return $this->success([
+            'price' => 1
+        ]);
+
+        // 如果参数错误
+        return $this->error([
+            'message' => '参数错误'
+        ]);
     }
 
     /**
