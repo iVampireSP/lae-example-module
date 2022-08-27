@@ -19,7 +19,7 @@ class HostController extends Controller
             'status' => 'processing',
         ])->json();
 
-        Log::debug($task['data']);
+        // Log::debug($task['data']);
         // 寻找服务器的逻辑
 
         $task_id = $task['data']['id'];
