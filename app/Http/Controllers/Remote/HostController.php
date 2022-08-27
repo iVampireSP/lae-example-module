@@ -13,30 +13,31 @@ class HostController extends Controller
     {
         // 创建云端任务(告知用户执行情况)
 
-        $task = $this->http->asForm()->post('/tasks', [
+        $task = $this->http->post('/tasks', [
             'title' => '正在寻找服务器',
             'host_id' => $request->id,
             'status' => 'processing',
         ])->json();
 
-        // Log::debug($task['data']);
+
+        // Log::debug($task);
         // 寻找服务器的逻辑
 
         $task_id = $task['data']['id'];
 
-        $this->http->asForm()->patch('/tasks/' . $task_id, [
+        $this->http->patch('/tasks/' . $task_id, [
             'title' => '已找到服务器',
         ]);
 
 
-        $this->http->asForm()->patch('/tasks/' . $task_id, [
+        $this->http->patch('/tasks/' . $task_id, [
             'title' => '正在创建您的服务。',
         ]);
 
         $host = Host::create($request->all());
 
 
-        $this->http->asForm()->patch('/tasks/' . $task_id, [
+        $this->http->patch('/tasks/' . $task_id, [
             'title' => '已完成创建。',
             'status' => 'success',
         ]);
