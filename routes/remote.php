@@ -1,45 +1,34 @@
 <?php
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Remote;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Remote\Functions;
 
-// Remote routes
+
+
+/**
+ * 远程路由 Remote
+ * 这里的路由都会暴露给用户和平台，并且您也必须确保它们都经过 'Remote' 中间件，否则这些路由将不安全。
+ * 
+ */
+
 
 Route::get('/remote', Remote\RemoteController::class);
 
-Route::resource('hosts', Remote\HostController::class);
-// Route::post('hosts', [Remote\HostController::class, 'createHost']);
-// Route::post('hosts/price', [Remote\HostController::class, 'calculatePrice']);
-// Route::match(['put', 'patch'], 'hosts/{host}', [Remote\HostController::class, 'update']);
-// Route::delete('hosts/{host}', [Remote\HostController::class, 'destroy']);
+Route::apiResource('work-orders', Remote\WorkOrder\WorkOrderController::class);
+Route::apiResource('work-orders.replies', Remote\WorkOrder\ReplyController::class);
+Route::apiResource('hosts', Remote\HostController::class)->only(['update', 'destroy']);
 
 
-
-
-Route::resource('work-orders', Remote\WorkOrder\WorkOrderController::class);
-Route::resource('work-orders.replies', Remote\WorkOrder\ReplyController::class);
-
+// 注意，以下路由都是暴露给用户的，并且必须经过 'Remote' 中间件，否则这些路由将不安全。
 
 /**
  * Export functions
  * 导出函数，提供给用户访问。
- * 所有方法都必须使用 POST 请求。
+ * 请求方式将会透传, 您定义了什么请求方式，在前端中就应该使用哪种类型的请求方式。
  */
 
-// Host 函数，比如控制服务器的启停
-Route::group(['prefix' => 'hosts/{host}/functions'], function () {
-    Route::post('/test', function () {
-        return ['test'];
-    });
-});
-
-// Module 函数，比如修改用户在此模块的信息
+// 当前模块的函数。服务器启停，创建，销毁，都需要进过这里。
 Route::group(['prefix' => '/functions'], function () {
-    Route::post('/module_func', function () {
-        return ['module_func'];
-    });
-    Route::post('/calcPrice', function () {
-        return ['module_func'];
-    });
+    Route::apiResource('hosts', Functions\HostController::class);
 });

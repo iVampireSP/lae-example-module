@@ -21,7 +21,7 @@
                 <tr>
                     <td>{{ $host->id }}</td>
                     <td>{{ $host->name }}</td>
-                    <td>{{ $host->client->name }}</td>
+                    <td>{{ $host->user->name }}</td>
                     <td>{{ $host->price }}</td>
                     <td>{{ $host->status }}</td>
                     <td>{{ $host->created_at }}</td>

@@ -5,107 +5,71 @@ namespace App\Http\Controllers\Remote;
 use App\Http\Controllers\Controller;
 use App\Models\Host;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 
 class HostController extends Controller
 {
-    public function store(Request $request)
-    {
-        // 创建云端任务(告知用户执行情况)
-
-        $task = $this->http->post('/tasks', [
-            'title' => '正在寻找服务器',
-            'host_id' => $request->id,
-            'status' => 'processing',
-        ])->json();
-
-
-        // Log::debug($task);
-        // 寻找服务器的逻辑
-
-        $task_id = $task['data']['id'];
-
-        $this->http->patch('/tasks/' . $task_id, [
-            'title' => '已找到服务器',
-        ]);
-
-
-        $this->http->patch('/tasks/' . $task_id, [
-            'title' => '正在创建您的服务。',
-        ]);
-
-        $host = Host::create($request->all());
-
-
-        $this->http->patch('/tasks/' . $task_id, [
-            'title' => '已完成创建。',
-            'status' => 'success',
-        ]);
-
-        // 将 price 添加到 host
-        $host->price = 1002;
-
-        return $this->created($host);
-    }
-
-    public function calculatePrice(Request $request)
-    {
-        // return
-
-        // 如果参数正确
-        return $this->success([
-            'price' => 1
-        ]);
-
-        // 如果参数错误
-        return $this->error([
-            'message' => '参数错误'
-        ]);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  Host $host
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Host $host)
     {
-        // patch
+        //
+
         switch ($request->status) {
             case 'running':
-                // 当启动或解除暂停时
-                $host->update($request->all());
-                break;
+                $this->http->post('/tasks', [
+                    'title' => '正在解除暂停。',
+                    'host_id' => $host->id,
+                    'status' => 'done',
+                ])->json();
 
-            case 'stopped':
-                // 当停止时（一般用于关机）
-                $host->update($request->all());
+                $host->status = 'running';
+                $host->save();
+
+                return $this->success($host);
+
                 break;
 
             case 'suspended':
+
+                // 如果主机被暂停，则代表主机进入待删除状态。
+                // 这个操作不能被用户调用，所以要判断是否是平台调用。
+
                 // 执行暂停操作，然后标记为暂停状态
 
+                // 检测是不是平台调用
+
                 $host->update($request->all());
+
+                // 执行一系列暂停操作
+
+                $this->http->post('/tasks', [
+                    'title' => '服务器已暂停。',
+                    'host_id' => $host->id,
+                    'status' => 'done',
+                ])->json();
+
+                break;
+
+            case 'error':
+                $host->update($request->all());
+
                 break;
         }
+
+        $host->update($request->all());
+
+        return $this->updated($host);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  Host $host
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Host $host)
     {
-        // 具体删除逻辑
-
-        // 比如销毁硬盘，踢掉用户等。   
-        $host->delete();
+        // 如果你想要拥有自己的一套删除逻辑，可以不处理这个。返回 false 即可。
+        return false;
 
 
-        return $this->deleted($host);
+        // 或者执行 Functions/HostController.php 中的 destroy 方法。
+
+        $HostController = new Functions\HostController();
+
+        return $HostController->destroy($host);
+
     }
 }

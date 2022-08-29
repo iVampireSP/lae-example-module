@@ -28,6 +28,10 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id')->index();
             $table->foreign('user_id')->references('id')->on('users');
 
+
+            // host_id
+            $table->unsignedBigInteger('host_id')->index();
+
             // price
             $table->double('price', 60, 8)->index();
 
@@ -35,7 +39,7 @@ return new class extends Migration
             $table->json('configuration')->nullable();
 
             // status
-            $table->enum('status', ['running', 'stopped', 'error', 'suspended', 'pending'])->default('pending')->index();
+            $table->string('status')->default('pending')->index();
 
             // soft delete
             $table->softDeletes();

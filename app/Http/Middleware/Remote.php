@@ -32,17 +32,14 @@ class Remote
         }
 
         // if request has user
-        if ($request->user) {
-            $remote_user = $request->toArray()['user'];
-            // find client if exists
-            $client = User::where('email', $remote_user['email'])->first();
+        if ($request->user_id) {
+            // find user if exists
+            $user = User::where('remote_id', $request->user_id)->first();
             // find or create client
-            if (!$client) {
-                $client = User::create([
-                    'id' => $remote_user['id'],
-                    'name' => $remote_user['name'],
-                    'email' => $remote_user['email'],
-                ]);
+            if (!$user) {
+                $user = User::create([
+                    'remote_id' => $request->user_id,
+                ]); 
             }
         }
 

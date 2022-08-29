@@ -13,15 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
-            $table->id();
+        Schema::table('hosts', function (Blueprint $table) {
+            //
+            $table->timestamp('suspended_at')->nullable()->index()->after('status');
 
-            $table->unsignedBigInteger('remote_id')->index()->comment('Remote User ID');
-
-            $table->string('name')->index()->nullable();
-            $table->string('email')->index()->nullable();
-            
-            $table->timestamps();
         });
     }
 
@@ -32,6 +27,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::table('hosts', function (Blueprint $table) {
+            //
+        });
     }
 };

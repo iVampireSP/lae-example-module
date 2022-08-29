@@ -16,7 +16,7 @@ class HostController extends Controller
     public function index()
     {
         //
-        $hosts = Host::with('client')->simplePaginate(10);
+        $hosts = Host::with('user')->simplePaginate(10);
 
         return view('hosts.index', compact('hosts'));
     }
@@ -104,9 +104,9 @@ class HostController extends Controller
     public function destroy(Host $host)
     {
         // 销毁前的逻辑
-        
-        // 发送到 LAE, 收到回调后到 Remote\HostController@destory 这里编写销毁逻辑。
-        $this->http->delete('hosts/' . $host->id);
+
+        $HostController = new Remote\Functions\HostController();
+        $HostController->destroy($host);
 
         return back()->with('success', '已开始销毁。');
     }

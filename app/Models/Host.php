@@ -17,35 +17,41 @@ class Host extends Model
     protected $fillable = [
         'id',
         'name',
-        'client_id',
+        'user_id',
+        'host_id',
         'price',
         'configuration',
         'status',
-        'created_at',
-        'updated_at',
     ];
 
-    // stop auto increment
-    public $incrementing = false;
-    public $timestamps = false;
-    
     protected $casts = [
-        'configuration' => 'array'
+        'configuration' => 'array',
+        'suspended_at' => 'datetime',
     ];
 
+    // scope thisUser
+    public function scopeThisUser($query)
+    {
+        $user_id = request('user_id');
+        return $query->where('user_id', $user_id);
+    }
 
-    // client
-    public function client() {
-        return $this->belongsTo(Client::class);
+
+    // user
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 
     // workOrders
-    public function workOrders() {
+    public function workOrders()
+    {
         return $this->hasMany(WorkOrder::class);
     }
 
     // scope
-    public function scopeRunning($query) {
+    public function scopeRunning($query)
+    {
         return $query->where('status', 'running')->where('price', '!=', 0);
     }
 
@@ -59,7 +65,14 @@ class Host extends Model
                 return false;
             }
         });
+
+        // update
+        static::updating(function ($model) {
+            if ($model->status == 'suspended') {
+                $model->suspended_at = now();
+            } else if ($model->status == 'running') {
+                $model->suspended_at = null;
+            }
+        });
     }
-
-
 }

@@ -4,6 +4,7 @@ namespace App\Models\WorkOrder;
 
 use App\Models\Client;
 use App\Models\Host;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -42,9 +43,9 @@ class WorkOrder extends Model
         return $this->belongsTo(Host::class);
     }
 
-    public function client()
+    public function user()
     {
-        return $this->belongsTo(Client::class);
+        return $this->belongsTo(User::class);
     }
 
     // on createing
