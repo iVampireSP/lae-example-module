@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Client;
+use App\Models\User;
 use Illuminate\Http\Request;
 
-class ClientController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +16,9 @@ class ClientController extends Controller
     public function index()
     {
         //
-        $clients = Client::simplePaginate(10);
+        $users = User::simplePaginate(10);
 
-        return view('clients.index', compact('clients'));
+        return view('users.index', compact('users'));
     }
 
     /**

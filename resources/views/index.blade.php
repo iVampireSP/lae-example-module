@@ -2,5 +2,5 @@
     {{--  --}}
 
 
-    <a href="{{ route('clients.index') }}">已经发现的客户列表</a>
+    您将要从哪里开始？
 </x-app-layout>

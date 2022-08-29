@@ -16,17 +16,17 @@
 
         {{-- 表内容 --}}
         <tbody>
-            @foreach ($clients as $client)
+            @foreach ($users as $user)
                 <tr>
-                    <td>{{ $client->id }}</td>
-                    <td>{{ $client->name }}</td>
-                    <td>{{ $client->email }}</td>
-                    <td>{{ $client->created_at }}</td>
-                    <td>{{ $client->updated_at }}</td>
+                    <td>{{ $user->id }}</td>
+                    <td>{{ $user->name }}</td>
+                    <td>{{ $user->email }}</td>
+                    <td>{{ $user->created_at }}</td>
+                    <td>{{ $user->updated_at }}</td>
                     {{-- <td>
-                        <a href="{{ route('clients.show', $client) }}">查看</a>
-                        <a href="{{ route('clients.edit', $client) }}">编辑</a>
-                        <form action="{{ route('clients.destroy', $client) }}" method="POST">
+                        <a href="{{ route('user.show', $user) }}">查看</a>
+                        <a href="{{ route('user.edit', $user) }}">编辑</a>
+                        <form action="{{ route('user.destroy', $user) }}" method="POST">
                             @csrf
                             @method('DELETE')
                             <button type="submit">删除</button>
@@ -37,9 +37,6 @@
         </tbody>
     </table>
 
-    {{-- @foreach ($clients as $client)
-        
-    @endforeach --}}
 
-    {{ $clients->links() }}
+    {{ $users->links() }}
 </x-app-layout>

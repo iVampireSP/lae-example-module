@@ -24,9 +24,9 @@ return new class extends Migration
             // name
             $table->string('name')->index();
 
-            // client_id
-            $table->unsignedBigInteger('client_id')->index();
-            $table->foreign('client_id')->references('id')->on('clients');
+            // user_id
+            $table->unsignedBigInteger('user_id')->index();
+            $table->foreign('user_id')->references('id')->on('users');
 
             // price
             $table->double('price', 60, 8)->index();

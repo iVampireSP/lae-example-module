@@ -26,8 +26,8 @@ return new class extends Migration
             $table->text('content');
 
             // user id
-            $table->unsignedBigInteger('client_id')->index();
-            $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade');
+            $table->unsignedBigInteger('user_id')->index();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
 
             // host id

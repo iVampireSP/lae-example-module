@@ -16,9 +16,9 @@ return new class extends Migration
         Schema::table('work_order_replies', function (Blueprint $table) {
             //
 
-            // client id
-            $table->unsignedBigInteger('client_id')->index()->nullable()->after('work_order_id');
-            $table->foreign('client_id')->references('id')->on('clients')->onDelete('set null');
+            // user id
+            $table->unsignedBigInteger('user_id')->index()->nullable()->after('work_order_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
         });
     }
 

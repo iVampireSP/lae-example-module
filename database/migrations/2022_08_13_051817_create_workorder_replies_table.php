@@ -28,7 +28,6 @@ return new class extends Migration
             $table->foreign('work_order_id')->references('id')->on('work_orders')->onDelete('cascade');
 
             
-
             
             $table->boolean('is_pending')->default(false)->index();
 
