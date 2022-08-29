@@ -51,6 +51,14 @@
         </div>
     @endif
 
+    <button onclick="location.reload()">重新加载</button>
+    <button onclick="location.reload()">重新加载</button>
+    <button onclick="location.reload()">重新加载</button>
+    <button onclick="location.reload()">重新加载</button>
+
+
+    <hr />
+
     <div class="min-h-screen bg-gray-100">
         {{-- 摆烂 --}}
         <!-- Page Content -->

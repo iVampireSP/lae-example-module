@@ -9,7 +9,7 @@
     <h3>{{ $work_order->title }}</h3>
     <h3>{{ $work_order->content }}</h3>
 
-    客户: {{ $work_order->client->name }} 的工单
+    客户: {{ $work_order->user->name }} 的工单
 
     {{-- replies --}}
     <h2>回复</h2>
@@ -17,7 +17,7 @@
     <ul>
         @foreach ($work_order->replies as $reply)
             <li>
-                {{ $reply->client_id ? $client->name : '您' }} 说
+                {{ $reply->user_id ? $user->name : '您' }} 说
                 <h4>{{ \Illuminate\Mail\Markdown::parse($reply->content) }}</h4>
                 <p>{{ $reply->created_at }}</p>
             </li>

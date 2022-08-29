@@ -16,7 +16,7 @@ class WorkOrderController extends Controller
     public function index(Request $request)
     {
         //
-        $workOrders = WorkOrder::with('client');
+        $workOrders = WorkOrder::with('user');
 
 
         $workOrders = $workOrders->where('status', $request->status ?? 'open');
@@ -70,16 +70,16 @@ class WorkOrderController extends Controller
 
         // if has status
         if ($request->has('status')) {
-            return back();
+            return back()->with('success', '工单状态已更新，请等待同步。');
         }
 
-        $work_order->load(['replies', 'client']);
+        $work_order->load(['replies', 'user']);
         //
 
-        $client = $work_order->client;
+        $user = $work_order->user;
 
 
-        return view('workOrders.show', compact('work_order', 'client'));
+        return view('workOrders.show', compact('work_order', 'user'));
     }
 
     /**

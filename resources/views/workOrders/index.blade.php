@@ -31,7 +31,7 @@
                 <tr>
                     <td><a href="{{ route('work-orders.show', $workOrder->id) }}">{{ $workOrder->id }}</a></td>
                     <td><a href="{{ route('work-orders.show', $workOrder->id) }}">{{ $workOrder->title }}</a></td>
-                    <td>{{ $workOrder->client->name }}</td>
+                    <td>{{ $workOrder->user->name }}</td>
                     <td>{{ $workOrder->status }}</td>
                     <td>{{ $workOrder->created_at }}</td>
                     <td>{{ $workOrder->updated_at }}</td>

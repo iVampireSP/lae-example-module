@@ -19,7 +19,7 @@ class WorkOrder extends Model
         'title',
         'content',
         'host_id',
-        'client_id',
+        'user_id',
         'status',
         'created_at',
         'updated_at',

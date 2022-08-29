@@ -29,6 +29,18 @@ class CreateAdmin extends Command
      */
     public function handle()
     {
+        // if is local
+        if (env('APP_ENV') == 'local') {
+            $this->info('由于是 local 环境，将会自动创建 Admin 用户。');
+            Admin::create([
+                'name' => 'Test',
+                'email' => 'im@ivampiresp.com',
+                'password' => bcrypt('123456'),
+            ]);
+            $this->info('邮箱: im@ivampiresp.com, 密码: 123456');
+
+            return 0;
+        }
         // ask for the name of the admin to create
         $name = $this->ask('请输入用户名');
         // ask for the email of the admin to create

@@ -20,7 +20,6 @@ class Host extends Model
         'user_id',
         'host_id',
         'price',
-        'configuration',
         'status',
     ];
 
@@ -41,6 +40,7 @@ class Host extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+
     }
 
     // workOrders

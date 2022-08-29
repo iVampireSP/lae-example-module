@@ -92,7 +92,7 @@ class HostController extends Controller
             'status' => $request->status,
         ]);
 
-        return back();
+        return back()->with('success', '正在执行对应的操作，操作将不会立即生效，因为他需要进行同步。');
     }
 
     /**

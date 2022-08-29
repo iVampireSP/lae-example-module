@@ -30,7 +30,7 @@ class ReplyController extends Controller
         $reply = new Reply();
         $reply->work_order_id = $request->work_order_id;
         $reply->content = $request->content;
-        $reply->client_id = $request->client_id;
+        $reply->user_id = $request->user_id;
         $reply->save();
 
         // return

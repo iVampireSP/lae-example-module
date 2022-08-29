@@ -31,15 +31,13 @@ class Remote
             return $this->unauthorized();
         }
 
-        // if request has user
         if ($request->user_id) {
-            // find user if exists
-            $user = User::where('remote_id', $request->user_id)->first();
-            // find or create client
-            if (!$user) {
-                $user = User::create([
-                    'remote_id' => $request->user_id,
-                ]); 
+            if ($request->isMethod('post')) {
+                $user = User::where('id', $request->user['id'])->firstOrCreate([
+                    'id' => $request->user['id'],
+                    'name' => $request->user['name'],
+                    'email' => $request->user['email'],
+                ]);
             }
         }
 
@@ -53,7 +51,8 @@ class Remote
         return $next($request);
     }
 
-    public function unauthorized() {
+    public function unauthorized()
+    {
         return response()->json([
             'message' => 'Unauthorized.'
         ], 401);

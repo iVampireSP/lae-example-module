@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
 
-            $table->unsignedBigInteger('remote_id')->index()->comment('Remote User ID');
+            // $table->unsignedBigInteger('remote_id')->index()->comment('Remote User ID');
 
             $table->string('name')->index()->nullable();
             $table->string('email')->index()->nullable();

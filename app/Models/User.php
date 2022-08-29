@@ -11,18 +11,16 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-
     // fillable
     protected $fillable = [
         'id',
-        'remote_id',
         'name',
         'email',
         'created_at',
         'updated_at',
     ];
 
-    // auto increment
-    // public $incrementing = true;
-    // public $timestamps = true;
+    // disable auto increment
+    public $incrementing = false;
+    public $timestamps = false;
 }

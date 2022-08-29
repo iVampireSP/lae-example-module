@@ -11,10 +11,9 @@ class HostController extends Controller
 {
     public function index(Request $request)
     {
-
         // dd($request);
         $hosts = Host::thisUser()->get();
-        return $hosts;
+        return $this->success($hosts);
     }
 
     public function store(Request $request)
@@ -95,33 +94,41 @@ class HostController extends Controller
 
         // 下面是状态操作，如果没有对状态进行操作，则不更新。
         // 并且状态操作是要被优先处理的。
-        switch ($request['status'] ?? null) {
-            case 'running':
-                // 当启动或解除暂停时
+        if (isset($request['status'])) {
+            switch ($request['status']) {
+                case 'running':
+                    // 当启动或解除暂停时
 
-                // 主机在除了 suspended 状态之外的状态下才能被启动。
+                    // 主机在除了 suspended 状态之外的状态下才能被启动。
 
-                if ($host->status != 'suspended') {
-                    $host->status = 'running';
+                    if ($host->status != 'suspended') {
+                        $host->status = 'running';
+                        $host->save();
+                    } else {
+                        return $this->forbidden('主机已被暂停，无法启动。');
+                    }
+
+                    // $host->update($request->all());
+                    break;
+
+                case 'stopped':
+                    // 当停止时（一般用于关机）
+
+                    // 用户可以随时停止服务器
+
+                    $host->status = 'stopped';
                     $host->save();
-                } else {
-                    return $this->forbidden('主机已被暂停，无法启动。');
-                }
 
-                // $host->update($request->all());
-                break;
+                    // $host->update($request->all());
 
-            case 'stopped':
-                // 当停止时（一般用于关机）
+                    break;
 
-                // 用户可以随时停止服务器
+                default:
+                    // 当没有对状态进行操作时，则不更新。
 
-                $host->status = 'stopped';
-                $host->save();
-
-                // $host->update($request->all());
-
-                break;
+                    return $this->error('不支持的操作。');
+                    break;
+            }
         }
 
         // 如果请求中没有状态操作，则更新其他字段，比如 name 等。
@@ -129,9 +136,13 @@ class HostController extends Controller
         // 这些我们在此函数一开始就检查了。
 
         // 此时，你可以通知云平台，主机已经更新。但是也请注意安全。
-        $this->http->patch('/hosts/' . $host->id, [
-            'name' => $request['name'],
-        ]);
+
+        // if has name
+        if (isset($request['name'])) {
+            $this->http->patch('/hosts/' . $host->id, [
+                'name' => $request['name'],
+            ]);
+        }
 
         $host->update($request);
         return $this->success($host);

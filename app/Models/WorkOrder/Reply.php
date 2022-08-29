@@ -17,7 +17,7 @@ class Reply extends Model
         'id',
         'content',
         'work_order_id',
-        'client_id',
+        'user_id',
         'is_pending',
         'created_at',
         'updated_at',
