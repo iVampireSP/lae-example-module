@@ -37,7 +37,7 @@
                                 <button type="submit">强制标记为在线</button>
                             </form>
                         @else
-                            <span style="color: red">正常</span>
+                            <span style="color: green">正常</span>
 
                             <form action="{{ route('servers.update', $server->id) }}" method="POST">
                                 @csrf
