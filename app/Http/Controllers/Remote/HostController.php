@@ -8,9 +8,10 @@ use Illuminate\Http\Request;
 
 class HostController extends Controller
 {
-    public function update(Request $request, Host $host)
+    public function update(Request $request)
     {
         //
+        $host = Host::where('host_id', $request->route('host'))->firstOrFail();
 
         switch ($request->status) {
             case 'running':
@@ -59,10 +60,12 @@ class HostController extends Controller
         return $this->updated($host);
     }
 
-    public function destroy(Host $host)
+    public function destroy(Request $request)
     {
         // 如果你想要拥有自己的一套删除逻辑，可以不处理这个。返回 false 即可。
         return false;
+
+        $host = Host::where('host_id', $request->route('host'))->firstOrFail();
 
 
         // 或者执行 Functions/HostController.php 中的 destroy 方法。

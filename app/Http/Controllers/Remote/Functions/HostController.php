@@ -179,7 +179,7 @@ class HostController extends Controller
         $host->delete();
 
         // 告诉云端，此主机已被删除。
-        $this->http->delete('/hosts/' . $host->id);
+        $this->http->delete('/hosts/' . $host->host_id);
 
         // 完成任务
         $this->http->patch('/tasks/' . $task_id, [
