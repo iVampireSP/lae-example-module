@@ -88,14 +88,14 @@ class HostController extends Controller
     public function update(Request $request, Host $host)
     {
         // 排除 request 中的一些参数
-        $request = $request->except(['id', 'user_id', 'host_id', 'price', 'managed_price', 'suspended_at', 'created_at', 'updated_at']);
+        $request_only = $request->except(['id', 'user_id', 'host_id', 'price', 'managed_price', 'suspended_at', 'created_at', 'updated_at']);
 
         // 如果 request 中 user_id 为 null，则是平台调用。否则是用户调用。
 
         // 下面是状态操作，如果没有对状态进行操作，则不更新。
         // 并且状态操作是要被优先处理的。
-        if (isset($request['status'])) {
-            switch ($request['status']) {
+        if ($request->has('status')) {
+            switch ($request->status) {
                 case 'running':
                     // 当启动或解除暂停时
 
@@ -138,13 +138,13 @@ class HostController extends Controller
         // 此时，你可以通知云平台，主机已经更新。但是也请注意安全。
 
         // if has name
-        if (isset($request['name'])) {
+        if ($request->has('name')) {
             $this->http->patch('/hosts/' . $host->id, [
-                'name' => $request['name'],
+                'name' => $request->name,
             ]);
         }
 
-        $host->update($request);
+        $host->update($request_only);
         return $this->success($host);
     }
 
