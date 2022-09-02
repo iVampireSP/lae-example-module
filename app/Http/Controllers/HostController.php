@@ -81,14 +81,14 @@ class HostController extends Controller
 
         // if status is cost
         if ($request->status == 'cost') {
-            $this->http->patch('hosts/' . $host->id, [
+            $this->http->patch('hosts/' . $host->host_id, [
                 'cost_once' => $host->price,
             ]);
             return back()->with('success', '已发送扣费请求。');
         }
 
 
-        $this->http->patch('hosts/' . $host->id, [
+        $this->http->patch('hosts/' . $host->host_id, [
             'status' => $request->status,
         ]);
 

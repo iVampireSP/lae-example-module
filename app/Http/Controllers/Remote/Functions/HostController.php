@@ -139,7 +139,7 @@ class HostController extends Controller
 
         // if has name
         if ($request->has('name')) {
-            $this->http->patch('/hosts/' . $host->id, [
+            $this->http->patch('/hosts/' . $host->host_id, [
                 'name' => $request->name,
             ]);
         }
@@ -160,7 +160,7 @@ class HostController extends Controller
 
         $task = $this->http->post('/tasks', [
             'title' => '正在删除...',
-            'host_id' => $host->id,
+            'host_id' => $host->host_id,
             'status' => 'processing',
         ])->json();
 
