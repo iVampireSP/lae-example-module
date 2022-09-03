@@ -63,7 +63,7 @@ class HostController extends Controller
     public function destroy(Request $request)
     {
         // 如果你想要拥有自己的一套删除逻辑，可以不处理这个。返回 false 即可。
-        return false;
+        // return false;
 
         $host = Host::where('host_id', $request->route('host'))->firstOrFail();
 
