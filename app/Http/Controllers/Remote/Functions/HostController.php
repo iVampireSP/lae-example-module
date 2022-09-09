@@ -16,7 +16,7 @@ class HostController extends Controller
         return $this->success($hosts);
     }
 
-    public function store(Request $request)
+    public function store(Request $request, Host $host)
     {
         // 创建云端任务(告知用户执行情况)
 
@@ -164,8 +164,18 @@ class HostController extends Controller
             'status' => 'processing',
         ])->json();
 
-        // 寻找服务器的逻辑
-        $task_id = $task['data']['id'];
+        $task_id = $task['data']['id'] ?? false;
+
+        if (!$task_id) {
+            return $this->error('任务创建失败。');
+        }
+
+        // 禁止删除 pending
+        if ($host->status === 'pending') {
+            return $this->http->patch('/tasks/' . $task_id, [
+                'title' => '无法删除服务器，因为服务器状态为 pending。',
+            ]);;
+        }
 
         $this->http->patch('/tasks/' . $task_id, [
             'title' => '正在关闭您的客户端连接...',
