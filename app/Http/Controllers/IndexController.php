@@ -15,7 +15,29 @@ class IndexController extends Controller
         if (!Auth::check()) {
             return view('login');
         } else {
-            return view('index');
+
+            // $module =
+            $module = $this->http->get('modules')->json()['data'];
+
+            $total = $module['transactions']['this_month']['balance'];
+
+            $drops = $module['transactions']['this_month']['drops'] / $module['rate'];
+
+            if ($drops < 0) {
+                $drops = 0;
+            }
+
+            $total += $drops;
+
+            $total = round($total, 2);
+
+            $module = [
+                'balance' => $module['transactions']['this_month']['balance'],
+                'drops' => $module['transactions']['this_month']['drops'],
+                'total' => $total,
+            ];
+
+            return view('index', ['module' => $module]);
         }
     }
 
@@ -33,10 +55,10 @@ class IndexController extends Controller
         }
     }
 
-    public function logout() {
+    public function logout()
+    {
         // logout
         Auth::logout();
         return redirect()->route('login');
     }
-
 }
