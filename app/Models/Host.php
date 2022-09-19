@@ -29,9 +29,9 @@ class Host extends Model
     ];
 
     // scope thisUser
-    public function scopeThisUser($query)
+    public function scopeThisUser($query, $user_id = null)
     {
-        $user_id = request('user_id');
+        $user_id = $user_id ?? request('user_id');
         return $query->where('user_id', $user_id);
     }
 

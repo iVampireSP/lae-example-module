@@ -3,6 +3,7 @@
 use App\Http\Controllers\Remote;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Remote\Functions;
+use App\Http\Controllers\Remote\Exports;
 
 
 
@@ -31,4 +32,9 @@ Route::apiResource('hosts', Remote\HostController::class)->only(['update', 'dest
 // 当前模块的函数。服务器启停，创建，销毁，都需要进过这里。
 Route::group(['prefix' => '/functions', 'as' => 'functions.'], function () {
     Route::apiResource('hosts', Functions\HostController::class);
+});
+
+// 导出函数。用于给其它集成模块调用。做到模块之间相互交换信息或控制。
+Route::group(['prefix' => '/exports', 'as' => 'exports.'], function () {
+    Route::apiResource('hosts', Exports\HostController::class);
 });
