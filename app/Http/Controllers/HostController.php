@@ -12,12 +12,24 @@ class HostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
-        $hosts = Host::with('user')->simplePaginate(10);
+        $hosts = Host::with('user');
 
-        $count = Host::count();
+        foreach ($request->except(['page']) as $key => $value) {
+            if (empty($value)) {
+                continue;
+            }
+
+            if ($request->{$key}) {
+                $hosts = $hosts->where($key, 'LIKE', '%' . $value . '%');
+            }
+        }
+
+        $count = $hosts->count();
+
+        $hosts = $hosts->simplePaginate(100);
 
         return view('hosts.index', ['hosts' => $hosts, 'count' => $count]);
     }
