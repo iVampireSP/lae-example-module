@@ -7,6 +7,7 @@ use App\Models\Client;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class Remote
 {
@@ -19,9 +20,9 @@ class Remote
      */
     public function handle(Request $request, Closure $next)
     {
+
         // add json header
         $request->headers->set('Accept', 'application/json');
-
         if (!$request->hasHeader('X-Remote-Api-Token')) {
             return $this->unauthorized();
         }
@@ -32,13 +33,17 @@ class Remote
         }
 
         if ($request->user_id) {
-            if ($request->isMethod('post')) {
-                $user = User::where('id', $request->user['id'])->firstOrCreate([
-                    'id' => $request->user['id'],
-                    'name' => $request->user['name'],
-                    'email' => $request->user['email'],
-                ]);
-            }
+            $user = User::where('id', $request->user['id'])->firstOrCreate([
+                'id' => $request->user['id'],
+                'name' => $request->user['name'],
+                'email' => $request->user['email'],
+            ]);
+
+
+            Auth::guard('user')->login($user);
+
+
+            dd(Auth::guard('user')->user());
         }
 
         // created_at and updated_at 序列化
