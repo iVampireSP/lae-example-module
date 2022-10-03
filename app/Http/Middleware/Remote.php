@@ -43,14 +43,20 @@ class Remote
             Auth::guard('user')->login($user);
 
 
-            dd(Auth::guard('user')->user());
+            // use Auth::guard('user')->user()
         }
 
-        // created_at and updated_at 序列化
-        $request->merge([
-            'created_at' => Carbon::parse($request->created_at)->toDateTimeString(),
-            'updated_at' => Carbon::parse($request->updated_at)->toDateTimeString(),
-        ]);
+
+        if ($request->created_at) {
+            // created_at and updated_at 序列化
+
+            $request->merge([
+                'created_at' => Carbon::parse($request->created_at)->toDateTimeString(),
+                'updated_at' => Carbon::parse($request->updated_at)->toDateTimeString(),
+            ]);
+        }
+
+
 
 
         return $next($request);
