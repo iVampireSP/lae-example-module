@@ -6,12 +6,11 @@ use App\Models\Client;
 use App\Models\WorkOrder\WorkOrder;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Host extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
 
     protected $table = 'hosts';
 

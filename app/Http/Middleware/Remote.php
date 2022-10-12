@@ -3,11 +3,11 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use App\Models\Client;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 
 class Remote
 {
@@ -33,17 +33,22 @@ class Remote
         }
 
         if ($request->user_id) {
-            $user = User::where('id', $request->user['id'])->firstOrCreate([
-                'id' => $request->user['id'],
-                'name' => $request->user['name'],
-                'email' => $request->user['email'],
-            ]);
+            $user = User::where('id', $request->user_id)->first();
+            // if user null
+            if (!$user) {
+                $http = Http::remote('remote')->asForm();
+                $user = $http->get('/users/' . $request->user_id)->json();
 
+                $user = User::create([
+                    'id' => $user['data']['id'],
+                    'name' => $user['data']['name'],
+                    'email' => $user['data']['email'],
+                    'created_at' => Carbon::parse($user['data']['created_at']),
+                    'updated_at' => Carbon::parse($user['data']['updated_at']),
+                ]);
+            }
 
             Auth::guard('user')->login($user);
-
-
-            // use Auth::guard('user')->user()
         }
 
 
@@ -55,9 +60,6 @@ class Remote
                 'updated_at' => Carbon::parse($request->updated_at)->toDateTimeString(),
             ]);
         }
-
-
-
 
         return $next($request);
     }
