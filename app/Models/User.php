@@ -16,11 +16,5 @@ class User extends Authenticatable
         'id',
         'name',
         'email',
-        'created_at',
-        'updated_at',
     ];
-
-    // disable auto increment
-    public $incrementing = false;
-    public $timestamps = false;
 }

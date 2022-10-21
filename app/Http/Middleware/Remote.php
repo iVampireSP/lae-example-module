@@ -43,22 +43,10 @@ class Remote
                     'id' => $user['data']['id'],
                     'name' => $user['data']['name'],
                     'email' => $user['data']['email'],
-                    'created_at' => Carbon::parse($user['data']['created_at']),
-                    'updated_at' => Carbon::parse($user['data']['updated_at']),
                 ]);
             }
 
             Auth::guard('user')->login($user);
-        }
-
-
-        if ($request->created_at) {
-            // created_at and updated_at 序列化
-
-            $request->merge([
-                'created_at' => Carbon::parse($request->created_at)->toDateTimeString(),
-                'updated_at' => Carbon::parse($request->updated_at)->toDateTimeString(),
-            ]);
         }
 
         return $next($request);
