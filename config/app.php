@@ -143,6 +143,8 @@ return [
         // 'store'  => 'redis',
     ],
 
+    'api_token' => env('API_TOKEN'),
+
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers
