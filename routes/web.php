@@ -12,26 +12,15 @@ Route::view('/login', 'login')->name('login');
 Route::post('/login', [IndexController::class, 'login']);
 
 
-// Auth group
-Route::group(['middleware' => 'auth'], function () {
+// 登入后的路由
+Route::group(['middleware' => 'auth:web'], function () {
     Route::get('/', [IndexController::class, 'index'])->name('index');
-
 
     Route::resource('users', UserController::class);
     Route::resource('servers', ServerController::class);
     Route::resource('hosts', HostController::class);
     Route::resource('work-orders', WorkOrderController::class);
     Route::resource('work-orders.replies', ReplyController::class);
-    // Route::resource('products', ProductController::class);
-    // // Route::resource('configurable-options', ConfigurableOptionController::class);
-    // Route::resource(
-    //     'configurable-option-groups',
-    //     ConfigurableOptionGroupController::class
-    // );
-    // Route::resource('configurable-option-groups.options', ConfigurableOptionController::class);
-
-
-
 
     Route::get('/logout', [IndexController::class, 'logout'])->name('logout');
 });
