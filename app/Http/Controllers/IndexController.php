@@ -12,7 +12,7 @@ class IndexController extends Controller
     public function index()
     {
         // if not login, redirect to login
-        if (!Auth::check()) {
+        if (!Auth::guard('web')->check()) {
             return view('login');
         } else {
 
@@ -58,7 +58,7 @@ class IndexController extends Controller
     public function logout()
     {
         // logout
-        Auth::logout();
+        Auth::guard('web')->logout();
         return redirect()->route('login');
     }
 }
