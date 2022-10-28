@@ -26,11 +26,16 @@ class HostController extends Controller
         $host = $this->http->post('/hosts', [
             'name' => $request->name, // 主机名称，如果为 null 则随机生成。
             'user_id' => $request->user_id, // 给指定用户创建主机
-            'price' => 10, // 计算的价格
+            'price' => 0, // 计算的价格
             'status' => 'pending', // 初始状态
-        ])->json();
+        ]);
+        $host_response = $host->json();
 
-        $host_id = $host['data']['id'];
+        if ($host->successful()) {
+            $host_id = $host_response['data']['id'];
+        } else {
+            return $this->error($host_response['data']);
+        }
 
         $task = $this->http->post('/tasks', [
             'title' => '正在寻找服务器',
