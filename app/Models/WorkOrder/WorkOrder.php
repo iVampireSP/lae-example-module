@@ -28,7 +28,7 @@ class WorkOrder extends Model
     public $incrementing = false;
 
     // 取消自动管理 timestamp
-    public $timestamps = false;
+    // public $timestamps = false;
 
 
     // replies
