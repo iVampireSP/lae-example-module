@@ -28,6 +28,11 @@ class Host extends Model
         'suspended_at' => 'datetime',
     ];
 
+    public function getRouteKeyName()
+    {
+        return 'host_id';
+    }
+
     // scope thisUser
     public function scopeThisUser($query, $user_id = null)
     {
