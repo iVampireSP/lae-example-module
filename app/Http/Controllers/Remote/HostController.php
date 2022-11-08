@@ -13,9 +13,8 @@ class HostController extends Controller
      * 这个方法非常重要！！！
      * 如果返回 404，莱云则判断主机不存在，会发起删除请求。
      * 一般情况下，只需要返回主机数据即可。
-     * @return \Illuminate\Http\Response
      */
-    public function index(Host $host)
+    public function show(Host $host)
     {
         return $this->success($host);
     }
