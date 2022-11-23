@@ -7,6 +7,7 @@ use App\Actions\HostAction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
+use App\Exceptions\HostActionException;
 
 class HostController extends Controller
 {
@@ -63,8 +64,13 @@ class HostController extends Controller
     public function destroy(Host $host)
     {
         // 具体删除逻辑
+        $hostAction = new HostAction();
 
-        dispatch(new \App\Jobs\HostJob($host, 'destroy'));
+        try {
+            $hostAction->destroy($host);
+        } catch (HostActionException $e) {
+            $this->error($e->getMessage());
+        }
 
         return $this->deleted($host);
     }

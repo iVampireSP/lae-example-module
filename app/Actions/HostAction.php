@@ -42,6 +42,9 @@ class HostAction extends Action
         // 这里，我们手动指定价格
 
         $host->price = 100;
+
+        // 这一步非常重要，在创建成功后，你必须将它设置为 running。
+        $host->status = 'running';
         $host->save();
 
         // 就这么简单，你已经创建了一个主机。
@@ -92,8 +95,16 @@ class HostAction extends Action
         // 之后，删除本地数据库中的数据
         $host->delete();
 
+        $this->updateTask(
+            $task,
+            '已删除。',
+            'done'
+        );
+
         // 告诉云端，此主机已被删除。
         $this->deleteCloudHost($host);
+
+        return true;
     }
 
     /**
