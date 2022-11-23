@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Host;
 use Illuminate\Http\Request;
+use App\Models\WorkOrder\WorkOrder;
 
 class HostController extends Controller
 {
@@ -58,12 +59,15 @@ class HostController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  Host $host
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Host $host)
     {
         //
+        $workOrders = WorkOrder::where('host_id', $host->id)->orderBy('id', 'desc')->paginate(100);
+
+        return view('hosts.show', ['host' => $host, 'workOrders' => $workOrders]);
     }
 
     /**

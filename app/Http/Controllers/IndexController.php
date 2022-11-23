@@ -32,7 +32,7 @@ class IndexController extends Controller
     {
         // login
 
-        // attempt to login (remember)
+        // attempt to login
         if (Auth::guard('web')->attempt($request->only(['email', 'password']), $request->has('remember'))) {
             // if success, redirect to home
             return redirect()->intended('/');

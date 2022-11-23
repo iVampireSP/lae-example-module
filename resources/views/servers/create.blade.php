@@ -20,8 +20,10 @@
             <option value="maintenance">维护中</option>
         </select>
 
+        <br />
+        <br />
         {{-- submit --}}
-        <input type="submit" value="添加" />
+        <input type="submit" value="添加" class="btn btn-primary" />
 
     </form>
 </x-app-layout>

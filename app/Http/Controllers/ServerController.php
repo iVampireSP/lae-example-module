@@ -92,10 +92,9 @@ class ServerController extends Controller
         //     'port' => 'required',
         //     'status' => 'required',
         // ]);
-
         $server->update($request->all());
 
-        return redirect()->route('servers.index')->with('success', '服务器成功更新。');
+        return back()->with('success', '服务器成功更新。');
     }
 
     /**

@@ -31,11 +31,6 @@ class WorkOrderController extends Controller
 
         $req = $request->all();
 
-        // find host
-        $host = Host::where('host_id', $request->host_id)->firstOrFail();
-
-        $req['host_id'] = $host->id;
-
         $workOrder = WorkOrder::create($req);
 
         return $this->success($workOrder);
@@ -61,14 +56,14 @@ class WorkOrderController extends Controller
      */
     public function update(Request $request, WorkOrder $work_order)
     {
-        //
-
         $req = $request->all();
 
-        // find host
-        $host = Host::where('host_id', $request->host_id)->firstOrFail();
+        // if ($request->filled('host_id')) {
+        //     // find host
+        //     $host = Host::where('host_id', $request->host_id)->firstOrFail();
 
-        $req['host_id'] = $host->id;
+        //     $req['host_id'] = $host->id;
+        // }
 
         $work_order->update($req);
 

@@ -85,6 +85,10 @@ class Host extends Model
         return $price;
     }
 
+    public function getPrice() {
+        return $this->managed_price ?? $this->price;
+    }
+
     protected static function boot()
     {
         parent::boot();

@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Client;
+use App\Models\Host;
 use App\Models\User;
+use App\Models\Client;
 use Illuminate\Http\Request;
+use App\Models\WorkOrder\WorkOrder;
 
 class UserController extends Controller
 {
@@ -59,21 +61,24 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  User $user
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $user)
     {
-        //
+        $hosts = Host::where('user_id', $user->id)->latest()->paginate(50, ['*'], 'hosts_page');
+        $workOrders = WorkOrder::where('user_id', $user->id)->latest()->paginate(50, ['*'], 'workOrders_page');
+
+        return view('users.show', compact('hosts', 'workOrders', 'user'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  User $user
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
         //
     }

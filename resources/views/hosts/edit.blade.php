@@ -4,6 +4,50 @@
 
     <h3>{{ $host->name }}</h3>
 
+    <h4>快捷操作</h4>
+
+    @if ($host->status == 'suspended')
+        <form action="{{ route('hosts.update', $host->id) }}" class="d-inline" method="POST">
+            @csrf
+            @method('PATCH')
+            <input type="hidden" name="status" value="running" />
+            <button class="btn btn-outline-primary" type="submit">取消暂停</button>
+        </form>
+    @else
+        <form action="{{ route('hosts.update', $host->id) }}" class="d-inline"  method="POST">
+            @csrf
+            @method('PATCH')
+            <input type="hidden" name="status" value="suspended" />
+            <button class="btn btn-outline-primary" type="submit">暂停</button>
+        </form>
+    @endif
+
+    @if ($host->status == 'stopped')
+        <form action="{{ route('hosts.update', $host->id) }}" class="d-inline" method="POST">
+            @csrf
+            @method('PATCH')
+            <input type="hidden" name="status" value="running" />
+            <button type="submit" class="btn btn-outline-primary">启动</button>
+        </form>
+    @else
+        <form action="{{ route('hosts.update', $host->id) }}" class="d-inline" method="POST">
+            @csrf
+            @method('PATCH')
+            <input type="hidden" name="status" value="stopped" />
+            <button type="submit" class="btn btn-outline-danger">停止</button>
+        </form>
+    @endif
+
+
+    <form action="{{ route('hosts.update', $host->id) }}" class="d-inline" method="POST"
+        onsubmit="return confirm('在非必要情况下，不建议手动扣费。要继续吗？')">
+        @csrf
+        @method('PATCH')
+        <input type="hidden" name="status" value="cost" />
+        <button type="submit" class="btn btn-outline-danger">扣费</button>
+    </form>
+
+
     <form method="post" action="{{ route('hosts.update', $host) }}">
         @csrf
         @method('PUT')
@@ -34,8 +78,9 @@
 
     </form>
 
-
-    <form method="post" action="{{ route('hosts.destroy', $host) }}">
+    <hr />
+    永久删除此主机
+    <form method="post" action="{{ route('hosts.destroy', $host) }}" onsubmit="return confirm('真的要删除吗？')">
         @csrf
         @method('DELETE')
         <button type="submit" class="btn btn-danger mt-3">删除</button>
