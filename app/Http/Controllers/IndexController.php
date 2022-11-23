@@ -17,9 +17,14 @@ class IndexController extends Controller
         } else {
 
             // $module =
-            $years = $this->http->get('modules')->json()['data'];
+            $modules = $this->http->get('modules');
 
-            return view('index', ['years' => $years]);
+            $response = $modules->json();
+            if ($modules->successful()) {
+                return view('index', ['years' => $response['data']]);
+            } else {
+                return view('error', ['response' => $response]);
+            }
         }
     }
 

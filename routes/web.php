@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HostController;
 use App\Http\Controllers\IndexController;
@@ -19,6 +20,7 @@ Route::group(['middleware' => 'auth:web'], function () {
     Route::resource('users', UserController::class);
     Route::resource('servers', ServerController::class);
     Route::resource('hosts', HostController::class);
+    Route::resource('admins', AdminController::class);
     Route::resource('work-orders', WorkOrderController::class);
     Route::resource('work-orders.replies', ReplyController::class);
 

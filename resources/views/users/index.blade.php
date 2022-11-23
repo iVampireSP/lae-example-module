@@ -1,9 +1,8 @@
 <x-app-layout>
-    <h1>已经发现的客户</h1>
+    <h3>已经发现的客户</h1>
 
-    <p>总计: {{ $count }}</p>
-    <table>
-        {{-- 表头 --}}
+    <p class="mt-3">总计: {{ $count }}</p>
+    <table class="table table-hover">
         <thead>
             <tr>
                 <th>ID</th>

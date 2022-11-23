@@ -1,71 +1,101 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<!doctype html>
+<html lang="zh_CN">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <title>{{ config('remote.module_name') }} - @yield('title', '莱云')</title>
 
-    <title>{{ config('app.name', 'LAE') }}</title>
+    <!-- Fonts -->
+    {{-- <link rel="dns-prefetch" href="//fonts.gstatic.com"> --}}
+    {{-- <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet"> --}}
+
+    <!-- Scripts -->
+    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
 
 <body>
-    @auth
-        <h3 style="text-align: center">{{ config('remote.module_name') }} 后台</h3>
-        {{-- 顶部横向菜单 --}}
-        <div class="top-menu">
-            <ul>
-                <li><a href="{{ route('index') }}">首页</a></li>
-                <li><a href="{{ route('users.index') }}">已经发现的客户</a></li>
-                {{-- <li><a href="{{ route('products.index') }}">产品</a></li> --}}
-                <li><a href="{{ route('hosts.index') }}">主机</a></li>
-                <li><a href="{{ route('servers.index') }}">服务器</a></li>
-                <li><a href="{{ route('work-orders.index') }}">工单</a></li>
-                <li><a href="{{ route('logout') }}">退出</a></li>
-            </ul>
-        </div>
-    @endauth
-    {{-- display error --}}
+    <div id="app">
+        <nav class="navbar navbar-expand-md shadow-sm bg-white">
+            <div class="container">
+                <a class="navbar-brand text-auto" href="{{ route('index') }}">
+                    {{ config('remote.module_name') }}
+                </a>
+                <button class="navbar-toggler text-auto" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-    {{-- if has success --}}
-    @if (session('success'))
-        <p style="color: green">
-            {{ session('success') }}
-        </p>
-    @endif
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <!-- Left Side Of Navbar -->
+                    @auth
+                        <ul class="navbar-nav me-auto">
+                            <li class="nav-item">
+                                <a class="nav-link text-auto" href="{{ route('index') }}">首页</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-auto" href="{{ route('users.index') }}">客户</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-auto" href="{{ route('hosts.index') }}">主机</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-auto" href="{{ route('servers.index') }}">服务器</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-auto" href="{{ route('work-orders.index') }}">工单</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-auto" href="{{ route('admins.index') }}">管理员</a>
+                            </li>
+                        </ul>
+                    @endauth
 
-    @if (session('error'))
-        <p style="color: red">
-            {{ session('error') }}
-        </p>
-    @endif
+                    <!-- Right Side Of Navbar -->
+                    <ul class="navbar-nav ms-auto">
+                        <!-- Authentication Links -->
+                        @guest
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('login') }}">登录</a>
+                            </li>
+                        @else
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    {{ Auth::user()->name }}
+                                </a>
 
-    @if ($errors->any())
-        <div>
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li style="color: red;">{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        退出登录
+                                    </a>
 
-    <button onclick="location.reload()">重新加载</button>
-    <button onclick="location.reload()">重新加载</button>
-    <button onclick="location.reload()">重新加载</button>
-    <button onclick="location.reload()">重新加载</button>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </li>
+                        @endguest
+                    </ul>
+                </div>
+            </div>
+        </nav>
 
+        <main class="py-4">
+            <x-alert />
 
-    <hr />
-
-    <div class="min-h-screen bg-gray-100">
-        {{-- 摆烂 --}}
-        <!-- Page Content -->
-        <main>
-            {{ $slot }}
+            <div class="container">
+                {{ $slot }}
+            </div>
         </main>
+
     </div>
 </body>
 

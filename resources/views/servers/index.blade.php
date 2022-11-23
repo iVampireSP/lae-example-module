@@ -1,8 +1,8 @@
 <x-app-layout>
-    <h1>服务器列表</h1>
+    <h3>服务器列表</h1>
     <a href="{{ route('servers.create') }}">添加服务器</a>
 
-    <table>
+    <table class="table table-hover">
         <thead>
             <tr>
                 <th>ID</th>

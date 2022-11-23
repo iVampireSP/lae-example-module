@@ -1,5 +1,5 @@
 <x-app-layout>
-    <h1>工单</h1>
+    <h3>工单</h1>
 
     {{-- 筛选 --}}
     <a href="?status=open">开启的工单</a>
@@ -9,10 +9,9 @@
     <a href="?status=read">您已读</a>
     <a href="?status=on_hold">挂起</a>
     <a href="?status=in_progress">正在处理</a>
-    
     <a href="?status=closed">已关闭</a>
 
-    <table>
+    <table class="table table-hover">
         <thead>
             <tr>
                 <th>ID</th>
