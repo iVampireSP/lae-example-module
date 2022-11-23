@@ -24,7 +24,7 @@
             <div class="card border-light mb-3 shadow">
                 <div class="card-header">
                     @if ($reply->user_id)
-                        <a href="{{ route('users.edit', $reply->user) }}">{{ $work_order->user->name }}</a>
+                        <a href="{{ route('users.show', $reply->user) }}">{{ $work_order->user->name }}</a>
                     @else
                         您
                     @endif
