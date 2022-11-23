@@ -12,7 +12,7 @@ class ChangePassword extends Command
      *
      * @var string
      */
-    protected $signature = 'pwd';
+    protected $signature = 'admin:change-password';
 
     /**
      * The console command description.
