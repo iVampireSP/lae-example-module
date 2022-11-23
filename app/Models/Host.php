@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Actions\HostAction;
+use App\Jobs\HostJob;
 use App\Models\Client;
 use App\Models\WorkOrder\WorkOrder;
 use Illuminate\Support\Facades\Http;
@@ -20,6 +22,7 @@ class Host extends Model
         'user_id',
         'host_id',
         'price',
+        'managed_price',
         'status',
     ];
 
@@ -45,7 +48,6 @@ class Host extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
-
     }
 
     // workOrders
@@ -93,7 +95,13 @@ class Host extends Model
                 return false;
             }
 
-            $model->price = $model->calcPrice();
+            if ($model->price === null) {
+                $model->price = $model->calcPrice();
+            }
+
+            if ($model->user_id === null) {
+                $model->user_id = auth('user')->id();
+            }
 
             // 云端 Host 应该在给 Model 创建数据之前被创建。
 
@@ -114,12 +122,41 @@ class Host extends Model
                 $model->suspended_at = null;
             }
 
-            // 当更新时，重新计算价格。
-            $model->price = $model->calcPrice();
+            $pending = [];
 
-            $http->patch('/hosts/' . $model->host_id, [
-                'price' => $model->price
-            ]);
+            if ($model->isDirty('price')) {
+                $pending['price'] = $model->price;
+            }
+
+            if ($model->isDirty('managed_price')) {
+                $pending['managed_price'] = $model->managed_price;
+            }
+
+            if ($model->isDirty('status')) {
+                $pending['status'] = $model->status;
+            }
+
+            if ($model->isDirty('name')) {
+                $pending['name'] = $model->name;
+            }
+
+            if (count($pending) > 0) {
+                $http->patch('/hosts/' . $model->host_id, $pending);
+            }
+        });
+
+
+        static::updated(function ($model) {
+            if ($model->isDirty('status')) {
+                $pending['status'] = $model->status;
+
+                $hostAction = new HostAction();
+
+                // 如果方法在 hostAction 中存在，就调用它。
+                if (method_exists($hostAction, $model->status)) {
+                    $hostAction->{$model->status}($model);
+                }
+            }
         });
     }
 }

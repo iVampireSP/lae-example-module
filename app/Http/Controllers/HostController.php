@@ -69,12 +69,13 @@ class HostController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  Host $host
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Host $host)
     {
         //
+        return view('hosts.edit', ['host' => $host]);
     }
 
     /**
@@ -88,8 +89,8 @@ class HostController extends Controller
     {
         //
         $request->validate([
-            'status' => 'sometimes|in:stopped,running,suspended,error,cost',
-            'managed_price' => 'sometimes|numeric',
+            'status' => 'nullable|in:stopped,running,suspended,error,cost',
+            'managed_price' => 'nullable|numeric',
         ]);
 
         // if status is cost
@@ -101,9 +102,7 @@ class HostController extends Controller
         }
 
 
-        $this->http->patch('hosts/' . $host->host_id, [
-            'status' => $request->status,
-        ]);
+        $this->http->patch('hosts/' . $host->host_id, $request->only(['name', 'managed_price']));
 
         return back()->with('success', '正在执行对应的操作，操作将不会立即生效，因为他需要进行同步。');
     }

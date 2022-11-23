@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Remote;
 use App\Http\Controllers\Controller;
 use App\Models\Host;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class HostController extends Controller
 {
@@ -23,56 +24,6 @@ class HostController extends Controller
     {
         //
         $host = Host::where('host_id', $request->route('host'))->firstOrFail();
-
-        switch ($request->status) {
-            case 'running':
-
-                if ($host->status == 'running') {
-                    return;
-                }
-
-                $this->http->post('/tasks', [
-                    'title' => '正在解除暂停。',
-                    'host_id' => $host->host_id,
-                    'status' => 'done',
-                ])->json();
-
-                $host->status = 'running';
-                $host->save();
-
-                return $this->success($host);
-
-                break;
-
-            case 'suspended':
-
-                // 如果主机被暂停，则代表主机进入待删除状态。
-                // 这个操作不能被用户调用，所以要判断是否是平台调用。
-
-                // 执行暂停操作，然后标记为暂停状态
-
-                // 检测是不是平台调用
-                if ($host->status == 'suspended') {
-                    return;
-                }
-
-                $host->update($request->all());
-
-                // 执行一系列暂停操作
-
-                $this->http->post('/tasks', [
-                    'title' => '服务器已暂停。',
-                    'host_id' => $host->host_id,
-                    'status' => 'done',
-                ])->json();
-
-                break;
-
-            case 'error':
-                $host->update($request->all());
-
-                break;
-        }
 
         $host->update($request->all());
 
