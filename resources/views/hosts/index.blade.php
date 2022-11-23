@@ -23,7 +23,7 @@
                 <tr>
                     <td>{{ $host->id }}</td>
                     <td>{{ $host->name }}</td>
-                    <td>{{ $host->user->name }}</td>
+                    <td><a href="{{ route('users.show', $host->user_id) }}">{{ $host->user->name }}</a></td>
                     <td>{{ $host->price }}</td>
                     <td>
                         <x-host-status :status="$host->status" />

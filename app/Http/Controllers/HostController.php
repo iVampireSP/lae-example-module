@@ -93,7 +93,7 @@ class HostController extends Controller
     {
         //
         $request->validate([
-            'status' => 'nullable|in:stopped,running,suspended,error,cost',
+            'status' => 'nullable|in:stopped,running,suspended,error,cost,pending',
             'managed_price' => 'nullable|numeric',
         ]);
 
@@ -105,8 +105,8 @@ class HostController extends Controller
             return back()->with('success', '已发送扣费请求。');
         }
 
+        $host->update($request->only(['status', 'managed_price']));
 
-        $this->http->patch('hosts/' . $host->host_id, $request->only(['name', 'managed_price']));
 
         return back()->with('success', '正在执行对应的操作，操作将不会立即生效，因为他需要进行同步。');
     }

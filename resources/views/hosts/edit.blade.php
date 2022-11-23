@@ -13,39 +13,53 @@
             <input type="hidden" name="status" value="running" />
             <button class="btn btn-outline-primary" type="submit">取消暂停</button>
         </form>
-    @else
-        <form action="{{ route('hosts.update', $host->id) }}" class="d-inline"  method="POST">
-            @csrf
-            @method('PATCH')
-            <input type="hidden" name="status" value="suspended" />
-            <button class="btn btn-outline-primary" type="submit">暂停</button>
-        </form>
-    @endif
-
-    @if ($host->status == 'stopped')
+    @elseif ($host->status == 'stopped')
         <form action="{{ route('hosts.update', $host->id) }}" class="d-inline" method="POST">
             @csrf
             @method('PATCH')
             <input type="hidden" name="status" value="running" />
             <button type="submit" class="btn btn-outline-primary">启动</button>
         </form>
-    @else
+    @elseif($host->status == 'running')
         <form action="{{ route('hosts.update', $host->id) }}" class="d-inline" method="POST">
             @csrf
             @method('PATCH')
             <input type="hidden" name="status" value="stopped" />
             <button type="submit" class="btn btn-outline-danger">停止</button>
         </form>
+    @elseif($host->status == 'pending')
+        <form action="{{ route('hosts.update', $host->id) }}" class="d-inline" method="POST">
+            @csrf
+            @method('PATCH')
+            <input type="hidden" name="status" value="running" />
+            <button type="submit" class="btn btn-outline-danger">强制标记为运行中</button>
+        </form>
     @endif
 
+    @if ($host->status !== 'pending')
+        <form action="{{ route('hosts.update', $host->id) }}" class="d-inline" method="POST"
+            onsubmit="return confirm('在非必要情况下，不建议手动扣费。要继续吗？')">
+            @csrf
+            @method('PATCH')
+            <input type="hidden" name="status" value="cost" />
+            <button type="submit" class="btn btn-outline-danger">扣费</button>
+        </form>
 
-    <form action="{{ route('hosts.update', $host->id) }}" class="d-inline" method="POST"
-        onsubmit="return confirm('在非必要情况下，不建议手动扣费。要继续吗？')">
-        @csrf
-        @method('PATCH')
-        <input type="hidden" name="status" value="cost" />
-        <button type="submit" class="btn btn-outline-danger">扣费</button>
-    </form>
+
+        <form action="{{ route('hosts.update', $host->id) }}" class="d-inline" method="POST">
+            @csrf
+            @method('PATCH')
+            <input type="hidden" name="status" value="suspended" />
+            <button class="btn btn-outline-primary" type="submit">暂停</button>
+        </form>
+
+        <form action="{{ route('hosts.update', $host->id) }}" class="d-inline" method="POST">
+            @csrf
+            @method('PATCH')
+            <input type="hidden" name="status" value="pending" />
+            <button type="submit" class="btn btn-outline-danger">标记为创建中</button>
+        </form>
+    @endif
 
 
     <form method="post" action="{{ route('hosts.update', $host) }}">
