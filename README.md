@@ -31,6 +31,12 @@ yarn
 cp .env.example .env
 ```
 
+## 执行迁移
+
+```bash
+php artisan migrate
+```
+
 ## 运行 yarn dev
 
 ```bash
