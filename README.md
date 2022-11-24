@@ -44,3 +44,15 @@ yarn dev
 ```text
 app/Actions/HostAction.php
 ```
+
+## 创建第一个管理员
+
+```bash
+php artisan admin:create
+```
+
+## 修改管理员密码
+
+```bash
+php artisan admin:change-password
+```
