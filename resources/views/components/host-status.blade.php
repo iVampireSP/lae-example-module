@@ -16,7 +16,11 @@
             <span class="badge bg-info">创建中</span>
         @break
 
+        @case('error')
+            <span class="badge bg-danger">错误</span>
+        @break
+
         @default
-            <span class="badge bg-secondary">{{ $status_str }}</span>
+            <span class="badge bg-secondary">{{ $status }}</span>
     @endswitch
 </span>
