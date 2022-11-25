@@ -35,15 +35,15 @@ return new class extends Migration
             // price
             $table->double('price', 60, 8)->index();
 
+            $table->double('managed_price', 60, 8)->index()->nullable();
+
             // config
             $table->json('configuration')->nullable();
 
             // status
             $table->string('status')->default('pending')->index();
 
-            // soft delete
-            $table->softDeletes();
-
+            $table->timestamp('suspended_at')->nullable()->index();
 
             $table->timestamps();
         });
