@@ -18,8 +18,6 @@ return new class extends Migration
         Schema::create('work_order_replies', function (Blueprint $table) {
             $table->id();
 
-            // $table->unsignedBigInteger('upstream_id')->index();
-
             // content
             $table->text('content');
 
@@ -27,8 +25,9 @@ return new class extends Migration
             $table->unsignedBigInteger('work_order_id')->index();
             $table->foreign('work_order_id')->references('id')->on('work_orders')->onDelete('cascade');
 
-            
-            
+            $table->unsignedBigInteger('user_id')->index()->nullable();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
+
             $table->boolean('is_pending')->default(false)->index();
 
 

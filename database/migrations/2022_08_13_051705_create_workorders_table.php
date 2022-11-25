@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\Module\ProviderModule;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -16,8 +15,6 @@ return new class extends Migration
     {
         Schema::create('work_orders', function (Blueprint $table) {
             $table->id();
-
-            // $table->unsignedBigInteger('upstream_id')->index();
 
             // title
             $table->string('title')->index();
