@@ -20,7 +20,6 @@ class HostController extends Controller
 
     public function store(Request $request)
     {
-
         $hostAction = new HostAction();
 
         $host = $hostAction->create($request->all());
@@ -28,7 +27,7 @@ class HostController extends Controller
         return $this->created($host);
     }
 
-    public function show(Request $request, Host $host)
+    public function show(Host $host)
     {
         $this->isUser($host);
 
@@ -45,6 +44,8 @@ class HostController extends Controller
      */
     public function update(Request $request, Host $host)
     {
+        $this->isUser($host);
+
         // 排除 request 中的一些参数
         $request_only = $request->except(['id', 'user_id', 'host_id', 'price', 'managed_price', 'suspended_at', 'created_at', 'updated_at']);
 
@@ -63,6 +64,8 @@ class HostController extends Controller
      */
     public function destroy(Host $host)
     {
+        $this->isUser($host);
+
         // 具体删除逻辑
         $hostAction = new HostAction();
 
