@@ -21,7 +21,8 @@ class HostAction extends Action
 
     public function create(array $requests)
     {
-        $host = $this->createCloudHost(0, $requests);
+        // 价格预留 0.01 可以用来验证用户是否有足够的余额。
+        $host = $this->createCloudHost(0.01, $requests);
 
         /* 这里开始，是创建服务器的逻辑 */
 
