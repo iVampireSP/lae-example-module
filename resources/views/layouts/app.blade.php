@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('remote.module_name') }} - @yield('title', '莱云')</title>
+    <title>{{ config('app.name') }}</title>
 
     <!-- Fonts -->
     {{-- <link rel="dns-prefetch" href="//fonts.gstatic.com"> --}}
@@ -23,7 +23,7 @@
         <nav class="navbar navbar-expand-md shadow-sm bg-white">
             <div class="container">
                 <a class="navbar-brand text-auto" href="{{ route('index') }}">
-                    {{ config('remote.module_name') }}
+                    {{ config('app.name') }}
                 </a>
                 <button class="navbar-toggler text-auto" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -49,6 +49,9 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-auto" href="{{ route('work-orders.index') }}">工单</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-auto" href="{{ route('devices.index') }}">物联设备</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-auto" href="{{ route('admins.index') }}">管理员</a>

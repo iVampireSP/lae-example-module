@@ -14,11 +14,11 @@ class RemoteController extends Controller
     {
         $data = [
             'remote' => [
-                'name' => config('remote.module_name'),
+                'name' => config('remote.module_id'),
             ],
             'servers' => Server::all()->toArray()
         ];
-        
+
         return $this->success($data);
     }
 }
