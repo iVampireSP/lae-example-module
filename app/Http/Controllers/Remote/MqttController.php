@@ -26,7 +26,7 @@ class MqttController extends Controller
 
         if ($device->client_id) {
             if ($device->client_id != $client_id) {
-                return $this->failed('客户端 ID 不匹配', 403);
+                return $this->forbidden('客户端 ID 不匹配', 403);
             }
         }
 
@@ -36,7 +36,7 @@ class MqttController extends Controller
             ]);
         }
 
-        return $this->failed('用户名或密码错误', 401);
+        return $this->forbidden('用户名或密码错误', 401);
     }
 
     public function authorization(Request $request)
@@ -50,7 +50,7 @@ class MqttController extends Controller
         $device = Device::where('name', $device_id)->first();
 
         if (!$device) {
-            return $this->failed('设备不存在', 404);
+            return $this->notFound('设备不存在', 404);
         }
 
         $device_allows = DeviceAllow::where('device_id', $device->id)
