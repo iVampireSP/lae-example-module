@@ -4,8 +4,7 @@ use App\Http\Controllers\Remote;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Remote\Functions;
 use App\Http\Controllers\Remote\Exports;
-
-
+use App\Http\Controllers\Remote\MqttController;
 
 /**
  * 远程路由 Remote
@@ -19,6 +18,12 @@ Route::get('/remote', Remote\RemoteController::class);
 Route::apiResource('work-orders', Remote\WorkOrder\WorkOrderController::class);
 Route::apiResource('work-orders.replies', Remote\WorkOrder\ReplyController::class);
 Route::apiResource('hosts', Remote\HostController::class)->only(['show', 'update', 'destroy']);
+
+// MQTT 部分
+// 登录
+Route::post('mqtt/authentication', [MqttController::class, 'authentication'])->name('mqtt.authentication');
+// 授权
+Route::post('mqtt/authorization', [MqttController::class, 'authorization'])->name('mqtt.authorization');
 
 
 // 注意，以下路由都是暴露给用户的，并且必须经过 'Remote' 中间件，否则这些路由将不安全。
