@@ -6,6 +6,7 @@ use App\Models\Device;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\DeviceAllow;
+use Illuminate\Support\Facades\Log;
 
 class MqttController extends Controller
 {
@@ -13,12 +14,23 @@ class MqttController extends Controller
 
     public function authentication(Request $request)
     {
+        $client_id = $request->input('client_id');
         $device_id = $request->input('device_id');
         $password = $request->input('password');
 
         $device = Device::where('name', $device_id)->first();
 
-        if ($device && $device->password == $password) {
+        if (!$device) {
+            return $this->notFound('No device found');
+        }
+
+        if ($device->client_id) {
+            if ($device->client_id != $client_id) {
+                return $this->failed('客户端 ID 不匹配', 403);
+            }
+        }
+
+        if ($device->password == $password) {
             return $this->success([
                 'result' => true,
             ]);
@@ -29,8 +41,6 @@ class MqttController extends Controller
 
     public function authorization(Request $request)
     {
-
-        $client_id = $request->input('client_id');
         $device_id = $request->input('device_id');
 
         $topic = $request->input('topic');
@@ -41,12 +51,6 @@ class MqttController extends Controller
 
         if (!$device) {
             return $this->failed('设备不存在', 404);
-        }
-
-        if ($device->client_id) {
-            if ($device->client_id != $client_id) {
-                return $this->failed('客户端 ID 不匹配', 403);
-            }
         }
 
         $device_allow = DeviceAllow::where('device_id', $device->id)
