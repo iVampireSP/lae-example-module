@@ -8,42 +8,42 @@
     <div class="overflow-auto mt-3">
         <table class="table table-hover">
             <thead>
-                <th>类型</th>
-                <th>主题</th>
-                <th>行动</th>
-                <th>操作</th>
+            <th>类型</th>
+            <th>主题</th>
+            <th>行动</th>
+            <th>操作</th>
             </thead>
 
             <tbody>
-                @foreach ($allows as $allow)
-                    {{-- {{ dd($device) }} --}}
-                    <tr>
-                        <td>
-                            @if ($allow->type === 'publish')
-                                发布
-                            @else
-                                订阅
-                            @endif
-                        </td>
-                        <td>
-                            {{ $allow->topic }}
-                        </td>
-                        <td>
-                            @if ($allow->action === 'allow')
-                                <span class="text-success">允许</span>
-                            @else
-                                <span class="text-danger">拒绝</span>
-                            @endif
-                        </td>
-                        <td>
-                            <form method="POST" action="{{ route('devices.allows.destroy', $allow) }}">
-                                @method('delete')
-                                @csrf
-                                <button type="submit" class="btn btn-danger btn-sm">删除</button>
-                            </form>
-                        </td>
-                    </tr>
-                @endforeach
+            @foreach ($allows as $allow)
+                {{-- {{ dd($device) }} --}}
+                <tr>
+                    <td>
+                        @if ($allow->type === 'publish')
+                            发布
+                        @else
+                            订阅
+                        @endif
+                    </td>
+                    <td>
+                        {{ $allow->topic }}
+                    </td>
+                    <td>
+                        @if ($allow->action === 'allow')
+                            <span class="text-success">允许</span>
+                        @else
+                            <span class="text-danger">拒绝</span>
+                        @endif
+                    </td>
+                    <td>
+                        <form method="POST" action="{{ route('devices.allows.destroy', $allow) }}">
+                            @method('delete')
+                            @csrf
+                            <button type="submit" class="btn btn-danger btn-sm">删除</button>
+                        </form>
+                    </td>
+                </tr>
+            @endforeach
             </tbody>
         </table>
     </div>
@@ -60,7 +60,7 @@
             </select>
 
             @error('type')
-                <div class="alert alert-danger">{{ $message }}</div>
+            <div class="alert alert-danger">{{ $message }}</div>
             @enderror
         </div>
 
@@ -72,7 +72,7 @@
             </select>
 
             @error('action')
-                <div class="alert alert-danger">{{ $message }}</div>
+            <div class="alert alert-danger">{{ $message }}</div>
             @enderror
         </div>
 
@@ -80,10 +80,10 @@
         <div class="form-group mt-1">
             <label for="topic">主题</label>
             <input type="text" name="topic" id="topic" class="form-control"
-                placeholder="{{ config('remote.module_id') }}/example" value="{{ old('topic') }}">
+                   placeholder="{{ config('remote.module_id') }}/example" value="{{ old('topic') }}">
 
             @error('topic')
-                <div class="alert alert-danger">{{ $message }}</div>
+            <div class="alert alert-danger">{{ $message }}</div>
             @enderror
         </div>
 

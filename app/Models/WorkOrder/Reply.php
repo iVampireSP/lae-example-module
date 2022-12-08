@@ -2,17 +2,15 @@
 
 namespace App\Models\WorkOrder;
 
-use App\Models\Client;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Reply extends Model
 {
-    use HasFactory;
 
+    public $incrementing = false;
     protected $table = 'work_order_replies';
-
     protected $fillable = [
         'id',
         'content',
@@ -23,9 +21,18 @@ class Reply extends Model
         'updated_at',
     ];
 
-    public $incrementing = false;
     // public $timestamps = false;
 
+    protected static function boot()
+    {
+        parent::boot();
+        static::creating(function ($model) {
+            // if id exists
+            if ($model->where('id', $model->id)->exists()) {
+                return false;
+            }
+        });
+    }
 
     public function workOrder()
     {
@@ -37,21 +44,11 @@ class Reply extends Model
         return $this->belongsTo(User::class);
     }
 
+
+    // on createing
+
     public function scopeWorkOrderId($query, $work_order_id)
     {
         return $query->where('work_order_id', $work_order_id);
-    }
-
-
-    // on createing
-    protected static function boot()
-    {
-        parent::boot();
-        static::creating(function ($model) {
-            // if id exists
-            if ($model->where('id', $model->id)->exists()) {
-                return false;
-            }
-        });
     }
 }

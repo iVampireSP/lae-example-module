@@ -1,10 +1,10 @@
 <?php
 
 use App\Http\Controllers\Remote;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Remote\Functions;
 use App\Http\Controllers\Remote\Exports;
+use App\Http\Controllers\Remote\Functions;
 use App\Http\Controllers\Remote\MqttController;
+use Illuminate\Support\Facades\Route;
 
 /**
  * 远程路由 Remote

@@ -3,15 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Models\Host;
-use Illuminate\Http\Request;
 use App\Models\WorkOrder\WorkOrder;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\View\View;
 
 class HostController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
     public function index(Request $request)
     {
@@ -38,7 +40,7 @@ class HostController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function create()
     {
@@ -48,8 +50,9 @@ class HostController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param \Illuminate\Http\Request $request
+     *
+     * @return Response
      */
     public function store(Request $request)
     {
@@ -59,8 +62,9 @@ class HostController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  Host $host
-     * @return \Illuminate\Http\Response
+     * @param Host $host
+     *
+     * @return Response
      */
     public function show(Host $host)
     {
@@ -73,8 +77,9 @@ class HostController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  Host $host
-     * @return \Illuminate\Http\Response
+     * @param Host $host
+     *
+     * @return Response
      */
     public function edit(Host $host)
     {
@@ -85,9 +90,10 @@ class HostController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  Host $host
-     * @return \Illuminate\Http\Response
+     * @param \Illuminate\Http\Request $request
+     * @param Host                     $host
+     *
+     * @return Response
      */
     public function update(Request $request, Host $host)
     {
@@ -114,8 +120,9 @@ class HostController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  Host $host
-     * @return \Illuminate\Http\Response
+     * @param Host $host
+     *
+     * @return Response
      */
     public function destroy(Host $host)
     {

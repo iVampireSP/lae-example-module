@@ -21,20 +21,10 @@ class ServerController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-        return view('servers.create');
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -55,9 +45,21 @@ class ServerController extends Controller
     }
 
     /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
+        return view('servers.create');
+    }
+
+    /**
      * Display the specified resource.
      *
-     * @param  Server $server
+     * @param Server $server
+     *
      * @return \Illuminate\Http\Response
      */
     public function show(Server $server)
@@ -69,7 +71,8 @@ class ServerController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  Server $server
+     * @param Server $server
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit(Server $server)
@@ -81,8 +84,9 @@ class ServerController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  Server $server
+     * @param \Illuminate\Http\Request $request
+     * @param Server                   $server
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Server $server)
@@ -102,7 +106,8 @@ class ServerController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  Server $server
+     * @param Server $server
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy(Server $server)

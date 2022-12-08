@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Remote\Functions;
 
-use App\Models\Host;
 use App\Actions\HostAction;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
-use App\Http\Controllers\Controller;
 use App\Exceptions\HostActionException;
+use App\Http\Controllers\Controller;
+use App\Models\Host;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class HostController extends Controller
 {
@@ -34,13 +34,24 @@ class HostController extends Controller
         return $this->success($host);
     }
 
+    public function isUser(Host $host)
+    {
+        // return $host->user_id == Auth::id();
+
+        if (request('user_id') !== null) {
+            if ($host->user_id != request('user_id')) {
+                abort(403);
+            }
+        }
+    }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  Host $host
-     * @return \Illuminate\Http\Response
+     * @param \Illuminate\Http\Request $request
+     * @param Host                     $host
+     *
+     * @return \Illuminate\Http\JsonResponse
      */
     public function update(Request $request, Host $host)
     {
@@ -59,8 +70,9 @@ class HostController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  Host $host
-     * @return \Illuminate\Http\Response
+     * @param Host $host
+     *
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(Host $host)
     {
@@ -76,17 +88,5 @@ class HostController extends Controller
         }
 
         return $this->deleted($host);
-    }
-
-
-    public function isUser(Host $host)
-    {
-        // return $host->user_id == Auth::id();
-
-        if (request('user_id') !== null) {
-            if ($host->user_id != request('user_id')) {
-                abort(403);
-            }
-        }
     }
 }

@@ -9,7 +9,8 @@
 
         <div class="form-group mt-1">
             <label for="name">名称</label>
-            <input type="text" class="form-control" id="name" name="name" placeholder="名称" value="{{ $admin->name }}" required>
+            <input type="text" class="form-control" id="name" name="name" placeholder="名称" value="{{ $admin->name }}"
+                   required>
         </div>
 
         <div class="form-group mt-1">
@@ -28,7 +29,7 @@
     </form>
 
 
-    <hr />
+    <hr/>
     <form method="POST" action="{{ route('admins.destroy', $admin) }}" onsubmit="return confirm('此管理员将不复存在。')">
         @csrf
         @method('DELETE')

@@ -40,7 +40,6 @@
     </div>
 
 
-
     <h2>您的回复</h2>
     <form method="POST" action="{{ route('work-orders.replies.store', $work_order->id) }}">
         @csrf

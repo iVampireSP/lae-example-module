@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\Admin;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -21,16 +20,6 @@ class AdminController extends Controller
         $admins = Admin::paginate(100);
 
         return view('admins.index', compact('admins'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return View
-     */
-    public function create(): View
-    {
-        return view('admins.create');
     }
 
     /**
@@ -59,6 +48,16 @@ class AdminController extends Controller
         ]);
 
         return redirect()->route('admins.edit', $admin)->with('success', '管理员创建成功，密码为：' . $password . '。');
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return View
+     */
+    public function create(): View
+    {
+        return view('admins.create');
     }
 
     /**

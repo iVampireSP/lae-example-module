@@ -13,7 +13,7 @@
                 <input type="checkbox" name="remember" id="remember">
                 <label for="remember">记住我</label>
 
-                <br />
+                <br/>
                 <button type="submit" class="btn btn-primary">登录</button>
             </div>
         </form>

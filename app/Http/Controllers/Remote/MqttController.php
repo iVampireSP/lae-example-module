@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers\Remote;
 
-use App\Models\Device;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Device;
 use App\Models\DeviceAllow;
-use Illuminate\Support\Facades\Log;
+use Illuminate\Http\Request;
 
 class MqttController extends Controller
 {

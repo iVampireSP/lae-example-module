@@ -1,15 +1,14 @@
 <?php
 
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\DeviceAllowController;
 use App\Http\Controllers\DeviceController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HostController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\ReplyController;
 use App\Http\Controllers\ServerController;
-use App\Http\Controllers\WorkOrderController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\WorkOrderController;
+use Illuminate\Support\Facades\Route;
 
 Route::view('/login', 'login')->name('login');
 Route::post('/login', [IndexController::class, 'login']);

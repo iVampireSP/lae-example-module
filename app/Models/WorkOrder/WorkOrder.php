@@ -2,7 +2,6 @@
 
 namespace App\Models\WorkOrder;
 
-use App\Models\Client;
 use App\Models\Host;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -12,8 +11,8 @@ class WorkOrder extends Model
 {
     use HasFactory;
 
+    public $incrementing = false;
     protected $table = 'work_orders';
-
     protected $fillable = [
         'id',
         'title',
@@ -25,30 +24,12 @@ class WorkOrder extends Model
         'updated_at',
     ];
 
-    public $incrementing = false;
-
     // 取消自动管理 timestamp
     // public $timestamps = false;
 
 
     // replies
-    public function replies()
-    {
-        return $this->hasMany(Reply::class);
-    }
 
-    // host
-    public function host()
-    {
-        return $this->belongsTo(Host::class);
-    }
-
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
-
-    // on createing
     protected static function boot()
     {
         parent::boot();
@@ -58,5 +39,24 @@ class WorkOrder extends Model
                 return false;
             }
         });
+    }
+
+    // host
+
+    public function replies()
+    {
+        return $this->hasMany(Reply::class);
+    }
+
+    public function host()
+    {
+        return $this->belongsTo(Host::class);
+    }
+
+    // on createing
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

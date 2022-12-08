@@ -8,27 +8,27 @@
     <div class="overflow-auto">
         <table class="table table-hover">
             <thead>
-                <th>ID</th>
-                <th>邮件</th>
-                <th>操作</th>
+            <th>ID</th>
+            <th>邮件</th>
+            <th>操作</th>
             </thead>
 
             <tbody>
-                @foreach ($admins as $admin)
-                    <tr>
-                        <td>
-                            <a href="{{ route('admins.edit', $admin) }}">
-                                {{ $admin->id }}
-                            </a>
-                        </td>
-                        <td>
-                            {{ $admin->email }}
-                        </td>
-                        <td>
-                            <a href="{{ route('admins.edit', $admin) }}" class="btn btn-primary btn-sm">编辑</a>
-                        </td>
-                    </tr>
-                @endforeach
+            @foreach ($admins as $admin)
+                <tr>
+                    <td>
+                        <a href="{{ route('admins.edit', $admin) }}">
+                            {{ $admin->id }}
+                        </a>
+                    </td>
+                    <td>
+                        {{ $admin->email }}
+                    </td>
+                    <td>
+                        <a href="{{ route('admins.edit', $admin) }}" class="btn btn-primary btn-sm">编辑</a>
+                    </td>
+                </tr>
+            @endforeach
             </tbody>
         </table>
     </div>

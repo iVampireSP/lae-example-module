@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Remote;
 use App\Http\Controllers\Controller;
 use App\Models\Host;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 
 class HostController extends Controller
 {

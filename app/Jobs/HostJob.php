@@ -2,14 +2,11 @@
 
 namespace App\Jobs;
 
-use App\Models\Host;
-use App\Actions\HostAction;
 use Illuminate\Bus\Queueable;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use Illuminate\Contracts\Queue\ShouldBeUnique;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
 
 class HostJob implements ShouldQueue
 {
@@ -38,6 +35,6 @@ class HostJob implements ShouldQueue
     {
         // 这里就是异步队列了，请按照你的业务来写。
 
-        return true;
+        return;
     }
 }

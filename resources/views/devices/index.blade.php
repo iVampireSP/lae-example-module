@@ -7,33 +7,33 @@
     <div class="overflow-auto">
         <table class="table table-hover">
             <thead>
-                <th>名称</th>
-                <th>Client ID</th>
-                <th>操作</th>
+            <th>名称</th>
+            <th>Client ID</th>
+            <th>操作</th>
             </thead>
 
             <tbody>
-                @foreach ($devices as $device)
-                    {{-- {{ dd($device) }} --}}
-                    <tr>
-                        <td>
-                            <a href="{{ route('devices.edit', $device) }}">
-                                {{ $device->name }}
-                            </a>
-                        </td>
-                        <td>
-                            @if ($device->client_id)
-                                {{ $device->client_id }}
-                            @else
-                                无
-                            @endif
-                        </td>
-                        <td>
-                            <a href="{{ route('devices.allows.index', $device) }}" class="btn btn-primary btn-sm">授权</a>
-                            <a href="{{ route('devices.edit', $device) }}" class="btn btn-primary btn-sm">编辑</a>
-                        </td>
-                    </tr>
-                @endforeach
+            @foreach ($devices as $device)
+                {{-- {{ dd($device) }} --}}
+                <tr>
+                    <td>
+                        <a href="{{ route('devices.edit', $device) }}">
+                            {{ $device->name }}
+                        </a>
+                    </td>
+                    <td>
+                        @if ($device->client_id)
+                            {{ $device->client_id }}
+                        @else
+                            无
+                        @endif
+                    </td>
+                    <td>
+                        <a href="{{ route('devices.allows.index', $device) }}" class="btn btn-primary btn-sm">授权</a>
+                        <a href="{{ route('devices.edit', $device) }}" class="btn btn-primary btn-sm">编辑</a>
+                    </td>
+                </tr>
+            @endforeach
             </tbody>
         </table>
     </div>

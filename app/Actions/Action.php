@@ -5,8 +5,8 @@ namespace App\Actions;
 use App\Exceptions\HostActionException;
 use App\Models\Host;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
 class Action
 {
@@ -41,33 +41,6 @@ class Action
         }
     }
 
-    protected function updateTask($task_id, $title = null, $status = null, $progress = null)
-    {
-        $append = [];
-
-        if ($title) {
-            $append['title'] = $title;
-        }
-
-        if ($status) {
-            $append['status'] = $status;
-        }
-
-        if ($progress) {
-            $append['progress'] = $progress;
-        }
-
-        // 完成任务
-        $resp = $this->http->patch('/tasks/' . $task_id, $append);
-
-        if ($resp->failed()) {
-            Log::error($resp->body());
-            return false;
-        } else {
-            return true;
-        }
-    }
-
     public function createCloudHost(float $price, array $data = [])
     {
         // 过滤掉不需要的数据
@@ -93,6 +66,33 @@ class Action
 
             $host = Host::create($data);
             return $host;
+        }
+    }
+
+    protected function updateTask($task_id, $title = null, $status = null, $progress = null)
+    {
+        $append = [];
+
+        if ($title) {
+            $append['title'] = $title;
+        }
+
+        if ($status) {
+            $append['status'] = $status;
+        }
+
+        if ($progress) {
+            $append['progress'] = $progress;
+        }
+
+        // 完成任务
+        $resp = $this->http->patch('/tasks/' . $task_id, $append);
+
+        if ($resp->failed()) {
+            Log::error($resp->body());
+            return false;
+        } else {
+            return true;
         }
     }
 

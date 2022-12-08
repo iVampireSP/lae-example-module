@@ -3,12 +3,10 @@
 namespace App\Models;
 
 use App\Actions\HostAction;
-use App\Jobs\HostJob;
-use App\Models\Client;
 use App\Models\WorkOrder\WorkOrder;
-use Illuminate\Support\Facades\Http;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Http;
 
 class Host extends Model
 {
@@ -30,64 +28,6 @@ class Host extends Model
         'configuration' => 'array',
         'suspended_at' => 'datetime',
     ];
-
-    public function getRouteKeyName()
-    {
-        return 'host_id';
-    }
-
-    // scope thisUser
-    public function scopeThisUser($query, $user_id = null)
-    {
-        $user_id = $user_id ?? request('user_id');
-        return $query->where('user_id', $user_id);
-    }
-
-
-    // user
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
-
-    // workOrders
-    public function workOrders()
-    {
-        return $this->hasMany(WorkOrder::class);
-    }
-
-    // scope
-    public function scopeRunning($query)
-    {
-        return $query->where('status', 'running')->where('price', '!=', 0);
-    }
-
-    public function calcPrice()
-    {
-
-        // 你可以自定义价格计算器。
-
-        // $this->load('location');
-        $price = 0;
-        // $price += $this->location->price;
-        // $price += ($this->cpu_limit / 100) * $this->location->cpu_price;
-        // $price += ($this->memory) *
-        //     $this->location->memory_price;
-        // $price += ($this->disk / 1024) *
-        //     $this->location->disk_price;
-        // $price += $this->backups *
-        //     $this->location->backup_price;
-        // $price += $this->allocations *
-        //     $this->location->allocation_price;
-        // $price += $this->databases *
-        //     $this->location->database_price;
-
-        return $price;
-    }
-
-    public function getPrice() {
-        return $this->managed_price ?? $this->price;
-    }
 
     protected static function boot()
     {
@@ -162,5 +102,68 @@ class Host extends Model
                 }
             }
         });
+    }
+
+    // scope thisUser
+
+    public function calcPrice()
+    {
+
+        // 你可以自定义价格计算器。
+
+        // $this->load('location');
+        $price = 0;
+        // $price += $this->location->price;
+        // $price += ($this->cpu_limit / 100) * $this->location->cpu_price;
+        // $price += ($this->memory) *
+        //     $this->location->memory_price;
+        // $price += ($this->disk / 1024) *
+        //     $this->location->disk_price;
+        // $price += $this->backups *
+        //     $this->location->backup_price;
+        // $price += $this->allocations *
+        //     $this->location->allocation_price;
+        // $price += $this->databases *
+        //     $this->location->database_price;
+
+        return $price;
+    }
+
+
+    // user
+
+    public function getRouteKeyName()
+    {
+        return 'host_id';
+    }
+
+    // workOrders
+
+    public function scopeThisUser($query, $user_id = null)
+    {
+        $user_id = $user_id ?? request('user_id');
+        return $query->where('user_id', $user_id);
+    }
+
+    // scope
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function workOrders()
+    {
+        return $this->hasMany(WorkOrder::class);
+    }
+
+    public function scopeRunning($query)
+    {
+        return $query->where('status', 'running')->where('price', '!=', 0);
+    }
+
+    public function getPrice()
+    {
+        return $this->managed_price ?? $this->price;
     }
 }

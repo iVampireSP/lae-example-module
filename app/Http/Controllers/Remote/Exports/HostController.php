@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Remote\Exports;
 
+use App\Http\Controllers\Controller;
 use App\Models\Host;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
 class HostController extends Controller
 {

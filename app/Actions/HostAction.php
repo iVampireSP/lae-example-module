@@ -2,9 +2,8 @@
 
 namespace App\Actions;
 
-use App\Models\Host;
-use App\Actions\Action;
 use App\Exceptions\HostActionException;
+use App\Models\Host;
 use Illuminate\Support\Facades\Log;
 
 /**
@@ -15,7 +14,6 @@ use Illuminate\Support\Facades\Log;
  * 但是需要结合你的业务来决定是否需要推到队列中执行，否则会在开发时造成不必要的麻烦。
  *
  */
-
 class HostAction extends Action
 {
 

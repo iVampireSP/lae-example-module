@@ -10,20 +10,20 @@
     <table class="table table-hover">
 
         <thead>
-            <th>ID</th>
-            <th>标题</th>
-            <th>创建时间</th>
+        <th>ID</th>
+        <th>标题</th>
+        <th>创建时间</th>
         </thead>
 
         <tbody>
 
-            <tr>
-                @foreach ($workOrders as $workOrder)
-                    <td>{{ $workOrder->id }}</td>
-                    <td>{{ $workOrder->title }}</td>
-                    <td>{{ $workOrder->created_at }}</td>
-                @endforeach
-            </tr>
+        <tr>
+            @foreach ($workOrders as $workOrder)
+                <td>{{ $workOrder->id }}</td>
+                <td>{{ $workOrder->title }}</td>
+                <td>{{ $workOrder->created_at }}</td>
+            @endforeach
+        </tr>
 
         </tbody>
     </table>
