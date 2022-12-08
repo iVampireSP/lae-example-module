@@ -3,16 +3,23 @@
 
     <a href="{{ route('servers.edit', $server) }}">编辑服务器</a>
 
+    <br />
 
-    <input type="text" name="name" placeholder="服务器名称" readonly value="{{ $server->name }} " />
+    名称: <input type="text" name="name" placeholder="服务器名称" readonly value="{{ $server->name }} "/>
 
+    <br />
 
-    <input type="text" name="fqdn" placeholder="服务器域名" readonly value="{{ $server->fqdn }} " />
+    FQDN:<input type="text" name="fqdn" placeholder="服务器域名" readonly value="{{ $server->fqdn }} "/>
 
+    <br />
 
-    <input type="text" name="port" placeholder="服务器端口" readonly value="{{ $server->port }} " />
+    端口: <input type="text" name="port" placeholder="服务器端口" readonly value="{{ $server->port }} "/>
 
+    <br />
 
-    <p>{{ $server->status }}</p>
+    <p class="mt-3">
+        服务器状态: <x-server-status :status="$server->status"/>
+    </p>
+
 
 </x-app-layout>

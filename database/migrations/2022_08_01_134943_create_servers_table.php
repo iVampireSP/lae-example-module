@@ -22,6 +22,9 @@ return new class extends Migration
             // port
             $table->integer('port')->default(22);
 
+            $table->string('username')->index()->nullable();
+            $table->string('password')->nullable();
+
             // status
             $table->string('status')->default('maintenance');
 

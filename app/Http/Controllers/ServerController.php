@@ -44,6 +44,8 @@ class ServerController extends Controller
             'name' => 'required',
             'fqdn' => 'required',
             'port' => 'required',
+            'username' => 'nullable',
+            'password' => 'nullable',
             'status' => 'required',
         ]);
 

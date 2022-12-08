@@ -13,6 +13,12 @@
         {{-- port --}}
         <input type="text" name="port" placeholder="服务器端口" />
 
+        {{-- username --}}
+        <input type="text" name="username" placeholder="服务器用户名" />
+
+        {{-- password --}}
+        <input type="password" name="password" placeholder="服务器密码" />
+
         {{-- status dropdown --}}
         <select name="status">
             <option value="up">在线</option>
