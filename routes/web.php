@@ -10,7 +10,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\WorkOrderController;
 use Illuminate\Support\Facades\Route;
 
-Route::view('/login', 'login')->name('login');
+Route::get('/login', [IndexController::class, 'index'])->name('login');
 Route::post('/login', [IndexController::class, 'login']);
 
 
@@ -31,5 +31,5 @@ Route::group(['middleware' => 'auth:web'], function () {
     Route::post('devices/{device}/allows', [DeviceController::class, 'store_allow'])->name('devices.allows.store');
     Route::delete('devices/allows/{allow}', [DeviceController::class, 'allow_destroy'])->name('devices.allows.destroy');
 
-    Route::get('/logout', [IndexController::class, 'logout'])->name('logout');
+    Route::post('/logout', [IndexController::class, 'logout'])->name('logout');
 });
