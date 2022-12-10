@@ -14,4 +14,9 @@ class Server extends Model
         'password',
         'status',
     ];
+
+    protected $hidden = [
+        'password',
+        'username',
+    ];
 }
