@@ -43,4 +43,5 @@ Route::group(['prefix' => '/functions', 'as' => 'functions.'], function () {
 // 导出函数。用于给其它集成模块调用。做到模块之间相互交换信息或控制。
 Route::group(['prefix' => '/exports', 'as' => 'exports.'], function () {
     Route::apiResource('hosts', Exports\HostController::class);
+    Route::apiResource('ips', Exports\IpController::class)->only(['show', 'destroy']);
 });
