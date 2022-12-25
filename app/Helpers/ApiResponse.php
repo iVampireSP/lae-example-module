@@ -17,10 +17,12 @@ trait ApiResponse
         return $this->apiResponse(['message' => $message], $code);
     }
 
-    // error
-
     public function apiResponse($data, $status = 200)
     {
+        if (is_string($data)) {
+            $data = ['message' => $data];
+        }
+
         return response()->json($data, $status);
     }
 
