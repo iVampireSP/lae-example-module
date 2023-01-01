@@ -21,19 +21,24 @@
 
         @foreach ($work_order->replies as $reply)
             <div class="card border-light mb-3 shadow">
-                <div class="card-header d-flex w-100 justify-content-between">
 
-                    @if ($reply->user_id)
-                        <a href="{{ route('users.edit', $reply->user) }}">{{ $work_order->user->name }}</a>
-                    @elseif ($reply->name === null && $reply->user_id === null)
-                        <span class="text-secondary">莱云</span>
-                    @else
-                        <span class="text-primary">此模块: {{ $reply->name }}</span>
+                <div class="card-header d-flex w-100 justify-content-between">
+                    @if ($reply->role === 'user')
+                        @if ($reply->user_id)
+                            <a href="{{ route('users.show', $reply->user) }}">{{ $work_order->user->name }}</a>
+                        @else
+                            {{ $reply->name }}
+                        @endif
+                    @elseif ($reply->role === 'admin')
+                        <span class="text-primary">{{ config('app.display_name') }}</span>
+                    @elseif ($reply->role === 'module')
+                        模块: {{ $reply->name }}
+                    @elseif ($reply->role === 'guest')
+                        {{ $reply->name }}
                     @endif
 
                     <span class="text-end">{{ $reply->created_at }}</span>
                 </div>
-
                 <div class="card-body">
                     {{ \Illuminate\Mail\Markdown::parse($reply->content) }}
                 </div>
