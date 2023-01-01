@@ -65,14 +65,21 @@ class WorkOrderController extends Controller
 
         $http = Http::remote('remote')->asForm();
 
+        if ($request->filled('status')) {
+            $http = $http->patch('work-orders/' . $work_order->id, [
+                'status' => $request->status,
+            ]);
 
-        $http = $http->patch('work-orders/' . $work_order->id, [
-            'status' => $request->status,
-        ]);
-
-        // if has status
-        if ($request->has('status')) {
-            return back()->with('success', '工单状态已更新，请等待同步。');
+            if ($request->has('status')) {
+                return back()->with('success', '工单状态已更新，请等待同步。');
+            }
+        } else {
+            // if work order status is open or user_replied, then set to read
+            if ($work_order->status == 'open' || $work_order->status == 'user_replied') {
+                $http = $http->patch('work-orders/' . $work_order->id, [
+                    'status' => 'read',
+                ]);
+            }
         }
 
         $work_order->load(['replies', 'user', 'host']);

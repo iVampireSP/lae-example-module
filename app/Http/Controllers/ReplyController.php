@@ -45,16 +45,10 @@ class ReplyController extends Controller
         // push to remote
         $http = Http::remote('remote')->asForm();
 
-        // dd([
-        //     'content' => $request->content,
-        //     'work_order_id' => $work_order->id,
-        // ]);
-
-        // dd($http);
-
         $http = $http->post('work-orders/' . $work_order->id . '/replies', [
             'content' => $request->input('content'),
             'work_order_id' => $work_order->id,
+            'name' => $request->user()->name,
         ]);
 
         if ($http->successful()) {

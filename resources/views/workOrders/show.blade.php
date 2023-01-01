@@ -17,16 +17,18 @@
 
 
     <div class="mt-3">
-        <!-- replies -->
         <h4>对话记录</h4>
 
         @foreach ($work_order->replies as $reply)
             <div class="card border-light mb-3 shadow">
-                <div class="card-header">
+                <div class="card-header d-flex w-100 justify-content-between">
+
                     @if ($reply->user_id)
-                        <a href="{{ route('users.show', $reply->user) }}">{{ $work_order->user->name }}</a>
+                        <a href="{{ route('users.edit', $reply->user) }}">{{ $work_order->user->name }}</a>
+                    @elseif ($reply->name === null && $reply->user_id === null)
+                        <span class="text-secondary">莱云</span>
                     @else
-                        您
+                        <span class="text-primary">此模块: {{ $reply->name }}</span>
                     @endif
 
                     <span class="text-end">{{ $reply->created_at }}</span>
