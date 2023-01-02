@@ -11,10 +11,7 @@ class IpController extends Controller
 
     public function __construct(Request $request)
     {
-        // 检测 X-Module 是否是 ip-manager
-        if ($request->header('X-Module') !== 'ip-manager') {
-            abort(403, 'X-Module header is not ip-manager');
-        }
+        $this->middleware('check_module_is_ip_manager');
     }
 
     /**
