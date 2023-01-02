@@ -7,13 +7,11 @@ use App\Exceptions\HostActionException;
 use App\Http\Controllers\Controller;
 use App\Models\Host;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 
 class HostController extends Controller
 {
     public function index(Request $request)
     {
-        // dd($request);
         $hosts = Host::thisUser()->get();
         return $this->success($hosts);
     }
