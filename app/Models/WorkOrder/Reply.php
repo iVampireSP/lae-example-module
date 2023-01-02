@@ -8,9 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Reply extends Model
 {
-
     public $incrementing = false;
+
     protected $table = 'work_order_replies';
+
     protected $fillable = [
         'id',
         'content',
@@ -19,6 +20,7 @@ class Reply extends Model
         'is_pending',
         'created_at',
         'updated_at',
+        'role'
     ];
 
     // public $timestamps = false;
@@ -43,9 +45,6 @@ class Reply extends Model
     {
         return $this->belongsTo(User::class);
     }
-
-
-    // on createing
 
     public function scopeWorkOrderId($query, $work_order_id)
     {
