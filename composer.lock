@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "42ea80d2a4862da7e9a9ecafd01c8070",
+    "content-hash": "2874ac093e23a3e6c2162dff7301e0f6",
     "packages": [
         {
             "name": "brick/math",
@@ -1068,6 +1068,61 @@
                 }
             ],
             "time": "2022-10-26T14:07:24+00:00"
+        },
+        {
+            "name": "ivampiresp/cocoa",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/iVampireSP/Cocoa.git",
+                "reference": "557dc45a34612841a31cabc3d315bd051e42b38e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/iVampireSP/Cocoa/zipball/557dc45a34612841a31cabc3d315bd051e42b38e",
+                "reference": "557dc45a34612841a31cabc3d315bd051e42b38e",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "laravel/framework": "^8.67|^9.0",
+                "php": "^8.0"
+            },
+            "default-branch": true,
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "ivampiresp\\Cocoa\\CocoaServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "ivampiresp\\Cocoa\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "iVampireSP.com",
+                    "email": "im@ivampiresp.com"
+                }
+            ],
+            "description": "LAE Module",
+            "support": {
+                "issues": "https://github.com/iVampireSP/Cocoa/issues",
+                "source": "https://github.com/iVampireSP/Cocoa/tree/main"
+            },
+            "time": "2023-01-12T11:09:38+00:00"
         },
         {
             "name": "laravel/framework",

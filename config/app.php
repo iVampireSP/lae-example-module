@@ -187,7 +187,7 @@ return [
         /*
          * Package Service Providers...
          */
-        \ivampiresp\Cocoa\CocoaServiceProvider::class,
+        // \ivampiresp\Cocoa\CocoaServiceProvider::class,
 
         /*
          * Application Service Providers...
