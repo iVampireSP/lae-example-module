@@ -31,6 +31,12 @@ yarn
 cp .env.example .env
 ```
 
+## 发布视图
+
+```bash
+php artisan vendor:publish --provider="ivampiresp\Cocoa\CocoaServiceProvider"
+```
+
 ## 执行迁移
 
 ```bash

@@ -47,7 +47,7 @@ class Kernel extends HttpKernel
 
         'remote' => [
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
-            \App\Http\Middleware\Remote::class
+            \ivampiresp\Cocoa\Http\Middleware\Remote::class
         ]
     ];
 

@@ -4,13 +4,14 @@ namespace App\Http\Controllers\Remote\Functions;
 
 use App\Actions\HostAction;
 use App\Exceptions\HostActionException;
-use App\Http\Controllers\Controller;
-use App\Models\Host;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use ivampiresp\Cocoa\Http\Controller;
+use ivampiresp\Cocoa\Models\Host;
 
 class HostController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
         $hosts = Host::thisUser()->get();
         return $this->success($hosts);
@@ -46,10 +47,10 @@ class HostController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param Host                     $host
+     * @param Request $request
+     * @param Host    $host
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function update(Request $request, Host $host)
     {
@@ -70,7 +71,7 @@ class HostController extends Controller
      *
      * @param Host $host
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function destroy(Host $host)
     {

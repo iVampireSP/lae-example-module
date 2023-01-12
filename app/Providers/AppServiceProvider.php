@@ -13,7 +13,7 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function register()
+    public function register(): void
     {
         //
     }
@@ -23,12 +23,8 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         Paginator::useBootstrapFive();
-
-        Http::macro('remote', function () {
-            return Http::withoutVerifying()->withToken(config('remote.api_token'))->baseUrl(config('remote.url'))->acceptJson();
-        });
     }
 }

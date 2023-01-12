@@ -3,8 +3,8 @@
 namespace App\Actions;
 
 use App\Exceptions\HostActionException;
-use App\Models\Host;
 use Illuminate\Support\Facades\Log;
+use ivampiresp\Cocoa\Models\Host;
 
 /**
  * 这里是主机的操作，你可以在这里写任何你想要的操作。
@@ -20,7 +20,10 @@ class HostAction extends Action
     public function create(array $requests)
     {
         // 价格预留 0.01 可以用来验证用户是否有足够的余额。
-        $host = $this->createCloudHost(0.01, $requests);
+        try {
+            $host = $this->createCloudHost(0.01, $requests);
+        } catch (HostActionException $e) {
+        }
 
         /* 这里开始，是创建服务器的逻辑 */
 

@@ -3,10 +3,10 @@
 namespace App\Actions;
 
 use App\Exceptions\HostActionException;
-use App\Models\Host;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
+use ivampiresp\Cocoa\Models\Host;
 
 class Action
 {

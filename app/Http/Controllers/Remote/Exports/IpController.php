@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers\Remote\Exports;
 
-use App\Http\Controllers\Controller;
-use App\Models\Ip;
-use Illuminate\Http\Request;
+use ivampiresp\Cocoa\Http\Controller;
+use ivampiresp\Cocoa\Models\Ip;
 
 class IpController extends Controller
 {
 
-    public function __construct(Request $request)
+    public function __construct()
     {
         $this->middleware('check_module_is_ip_manager');
     }

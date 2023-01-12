@@ -67,7 +67,7 @@ return [
     'providers' => [
         'admins' => [
             'driver' => 'eloquent',
-            'model' => App\Models\Admin::class,
+            'model' => \ivampiresp\Cocoa\Models\Admin::class,
         ],
 
         'users' => [

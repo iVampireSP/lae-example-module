@@ -20,7 +20,7 @@
 
 <body>
 <div id="app">
-    <nav class="navbar navbar-expand-md shadow-sm bg-white">
+    <nav class="navbar navbar-expand-md shadow-sm bg-body">
         <div class="container">
             <a class="navbar-brand text-auto" href="{{ route('index') }}">
                 {{ config('app.name') }}

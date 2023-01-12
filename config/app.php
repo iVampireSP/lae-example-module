@@ -82,7 +82,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'zh_CN',
 
     /*
     |--------------------------------------------------------------------------
@@ -187,6 +187,7 @@ return [
         /*
          * Package Service Providers...
          */
+        \ivampiresp\Cocoa\CocoaServiceProvider::class,
 
         /*
          * Application Service Providers...
