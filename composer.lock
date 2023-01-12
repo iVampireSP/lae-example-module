@@ -1075,12 +1075,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/iVampireSP/Cocoa.git",
-                "reference": "557dc45a34612841a31cabc3d315bd051e42b38e"
+                "reference": "7021f495f4f30f1d3f508f1cace00196e2e36505"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/iVampireSP/Cocoa/zipball/557dc45a34612841a31cabc3d315bd051e42b38e",
-                "reference": "557dc45a34612841a31cabc3d315bd051e42b38e",
+                "url": "https://api.github.com/repos/iVampireSP/Cocoa/zipball/7021f495f4f30f1d3f508f1cace00196e2e36505",
+                "reference": "7021f495f4f30f1d3f508f1cace00196e2e36505",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -1122,7 +1122,7 @@
                 "issues": "https://github.com/iVampireSP/Cocoa/issues",
                 "source": "https://github.com/iVampireSP/Cocoa/tree/main"
             },
-            "time": "2023-01-12T11:09:38+00:00"
+            "time": "2023-01-12T11:38:01+00:00"
         },
         {
             "name": "laravel/framework",
