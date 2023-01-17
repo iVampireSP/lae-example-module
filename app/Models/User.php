@@ -11,8 +11,6 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    // fillable
-    public mixed $id;
     protected $fillable = [
         'id',
         'name',
