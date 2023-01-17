@@ -1,6 +1,12 @@
 import _ from 'lodash';
 import 'bootstrap';
 
+import './color-mode'
+
+import 'bootstrap/js/dist/popover';
+import 'bootstrap/js/dist/tooltip';
+import 'bootstrap-icons/font/bootstrap-icons.css';
+
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
  * to our Laravel back-end. This library automatically handles sending the

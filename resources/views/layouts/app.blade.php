@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="zh_CN">
+<html lang="zh_CN" data-bs-theme="dark">
 
 <head>
     <meta charset="utf-8">
@@ -22,10 +22,10 @@
 <div id="app">
     <nav class="navbar navbar-expand-md shadow-sm bg-body">
         <div class="container">
-            <a class="navbar-brand text-auto" href="{{ route('index') }}">
+            <a class="navbar-brand" href="{{ route('index') }}">
                 {{ config('app.name') }}
             </a>
-            <button class="navbar-toggler text-auto" type="button" data-bs-toggle="collapse"
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                 <span class="navbar-toggler-icon"></span>
@@ -36,25 +36,25 @@
                 @auth
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a class="nav-link text-auto" href="{{ route('index') }}">首页</a>
+                            <a class="nav-link" href="{{ route('index') }}">首页</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-auto" href="{{ route('users.index') }}">客户</a>
+                            <a class="nav-link" href="{{ route('users.index') }}">客户</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-auto" href="{{ route('hosts.index') }}">主机</a>
+                            <a class="nav-link" href="{{ route('hosts.index') }}">主机</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-auto" href="{{ route('servers.index') }}">服务器</a>
+                            <a class="nav-link" href="{{ route('servers.index') }}">服务器</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-auto" href="{{ route('work-orders.index') }}">工单</a>
+                            <a class="nav-link" href="{{ route('work-orders.index') }}">工单</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-auto" href="{{ route('devices.index') }}">物联设备</a>
+                            <a class="nav-link" href="{{ route('devices.index') }}">物联设备</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-auto" href="{{ route('admins.index') }}">管理员</a>
+                            <a class="nav-link" href="{{ route('admins.index') }}">管理员</a>
                         </li>
                     </ul>
                 @endauth
@@ -75,8 +75,7 @@
 
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="{{ route('logout') }}"
-                                   onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                                   onclick="document.getElementById('logout-form').submit();return false;">
                                     退出登录
                                 </a>
 
