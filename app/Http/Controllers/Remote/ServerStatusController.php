@@ -2,12 +2,8 @@
 
 namespace App\Http\Controllers\Remote;
 
-use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Str;
 use ivampiresp\Cocoa\Http\Controller;
-use ivampiresp\Cocoa\Models\Admin;
-use ivampiresp\Cocoa\Models\Server;
+use App\Models\Server;
 
 // use Illuminate\Http\Request;
 
