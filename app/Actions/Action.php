@@ -3,18 +3,19 @@
 namespace App\Actions;
 
 use App\Exceptions\HostActionException;
+use App\Models\Host;
+use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
-use ivampiresp\Cocoa\Models\Host;
 
 class Action
 {
-    protected $http;
+    protected PendingRequest $http;
 
     public function __construct()
     {
-        $this->http = Http::remote()->asForm();
+        $this->http = Http::remote();
     }
 
     public function createTask($host, $title, $status = 'processing', $progress = null)
@@ -41,7 +42,10 @@ class Action
         }
     }
 
-    public function createCloudHost(float $price, array $data = [])
+    /**
+     * @throws HostActionException
+     */
+    public function createCloudHost(float $price, array $data = []): Host
     {
         // 过滤掉不需要的数据
         $data = Arr::except($data, ['id', 'user_id', 'host_id', 'price', 'managed_price', 'suspended_at', 'created_at', 'updated_at']);
@@ -64,12 +68,11 @@ class Action
             $host_id = $resp_json['id'];
             $data['host_id'] = $host_id;
 
-            $host = Host::create($data);
-            return $host;
+            return Host::create($data);
         }
     }
 
-    protected function updateTask($task_id, $title = null, $status = null, $progress = null)
+    protected function updateTask($task_id, $title = null, $status = null, $progress = null): bool
     {
         $append = [];
 
@@ -114,7 +117,7 @@ class Action
         }
     }
 
-    protected function deleteCloudHost($host)
+    protected function deleteCloudHost($host): bool
     {
         if ($host instanceof Host) {
             $host_id = $host->host_id;
