@@ -11,6 +11,6 @@ class UserController extends Controller
 {
     public function __invoke(Request $request): JsonResponse
     {
-        return $this->success(auth('user')->user());
+        return $this->success(auth('api')->user());
     }
 }
