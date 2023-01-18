@@ -53,7 +53,7 @@ class Action
         $data = array_merge([
             'price' => $price,
             'status' => 'pending',
-            'user_id' => auth('user')->id(),
+            'user_id' => auth('api')->id(),
         ], $data);
 
         $resp = $this->http->post('/hosts', $data);
