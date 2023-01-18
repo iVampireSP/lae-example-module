@@ -62,7 +62,7 @@
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ms-auto">
                     <!-- Authentication Links -->
-                    @guest
+                    @guest('admin')
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('login') }}">登录</a>
                         </li>
@@ -70,7 +70,7 @@
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                {{ Auth::user()->name }}
+                                {{ Auth::guard('admin')->user()->name }}
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
@@ -94,6 +94,19 @@
         <x-alert/>
 
         <div class="container">
+            @if (config('app.env') === 'local')
+                <div>
+                    <div class="alert alert-danger d-flex align-items-center alert-dismissible fade show" role="alert">
+                        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:">
+                            <use xlink:href="#exclamation-triangle-fill"/>
+                        </svg>
+                        <div>
+                            当前正在运行于测试环境。
+                        </div>
+                    </div>
+                </div>
+            @endif
+
             {{ $slot }}
         </div>
     </main>
