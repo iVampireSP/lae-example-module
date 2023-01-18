@@ -139,8 +139,8 @@ return [
     */
 
     'maintenance' => [
-        'driver' => 'file',
-        // 'store'  => 'redis',
+        'driver' => 'cache',
+        'store'  => 'redis',
     ],
 
     'api_token' => env('API_TOKEN'),
