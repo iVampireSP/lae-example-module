@@ -17,7 +17,7 @@ class CheckModuleIsIpManager
      *
      * @return Response|RedirectResponse
      */
-    public function handle(Request $request, Closure $next)
+    public function handle(Request $request, Closure $next): Response|RedirectResponse
     {
         // 检测 X-Module 是否是 ip-manager
         if ($request->header('X-Module') !== 'ip-manager') {
