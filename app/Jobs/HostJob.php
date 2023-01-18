@@ -37,6 +37,5 @@ class HostJob implements ShouldQueue
     {
         // 这里就是异步队列了，请按照你的业务来写。
 
-        return;
     }
 }
