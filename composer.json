@@ -9,10 +9,11 @@
     "license": "MIT",
     "require": {
         "php": "^8.0.2",
+        "ext-bcmath": "*",
+        "doctrine/dbal": "^3.5",
         "guzzlehttp/guzzle": "^7.2",
         "ivampiresp/cocoa": "dev-main",
         "laravel/framework": "^9.19",
-        "laravel/sanctum": "^2.14.1",
         "laravel/tinker": "^2.7",
         "parsedown/laravel": "^1.2"
     },
