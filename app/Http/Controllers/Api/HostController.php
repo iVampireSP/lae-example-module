@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Remote\Functions;
+namespace App\Http\Controllers\Api;
 
 use App\Actions\HostAction;
 use App\Exceptions\HostActionException;
+use App\Models\Host;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use ivampiresp\Cocoa\Http\Controller;
-use ivampiresp\Cocoa\Models\Host;
 
 class HostController extends Controller
 {
