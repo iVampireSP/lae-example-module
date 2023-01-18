@@ -106,7 +106,6 @@ class HostController extends Controller
     public function destroy(Host $host): RedirectResponse
     {
         // 销毁前的逻辑
-
         $HostController = new Api\HostController();
         $HostController->destroy($host);
 
