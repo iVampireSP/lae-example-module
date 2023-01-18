@@ -15,7 +15,8 @@
         "ivampiresp/cocoa": "dev-main",
         "laravel/framework": "^9.19",
         "laravel/tinker": "^2.7",
-        "parsedown/laravel": "^1.2"
+        "parsedown/laravel": "^1.2",
+        "ext-pdo": "*"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
