@@ -22,9 +22,9 @@ class Alert extends Component
     /**
      * Get the view / contents that represent the component.
      *
-     * @return Application|Factory|View
+     * @return View
      */
-    public function render()
+    public function render(): View
     {
         return view('components.alert');
     }
