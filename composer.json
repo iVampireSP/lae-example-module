@@ -10,13 +10,13 @@
     "require": {
         "php": "^8.0.2",
         "ext-bcmath": "*",
+        "ext-pdo": "*",
         "doctrine/dbal": "^3.5",
         "guzzlehttp/guzzle": "^7.2",
-        "ivampiresp/cocoa": "dev-main",
+        "ivampiresp/cocoa": "^0.0.2",
         "laravel/framework": "^9.19",
         "laravel/tinker": "^2.7",
-        "parsedown/laravel": "^1.2",
-        "ext-pdo": "*"
+        "parsedown/laravel": "^1.2"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
