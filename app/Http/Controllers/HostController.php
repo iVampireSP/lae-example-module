@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Host;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use ivampiresp\Cocoa\Http\Controller;
-use ivampiresp\Cocoa\Models\Host;
 use ivampiresp\Cocoa\Models\WorkOrder\WorkOrder;
 
 class HostController extends Controller
@@ -107,7 +107,7 @@ class HostController extends Controller
     {
         // 销毁前的逻辑
 
-        $HostController = new \App\Http\Controllers\Remote\Functions\HostController();
+        $HostController = new Api\HostController();
         $HostController->destroy($host);
 
         return back()->with('success', '已开始销毁。');
