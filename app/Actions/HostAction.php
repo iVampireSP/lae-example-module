@@ -3,8 +3,8 @@
 namespace App\Actions;
 
 use App\Exceptions\HostActionException;
-use Illuminate\Support\Facades\Log;
 use App\Models\Host;
+use Illuminate\Support\Facades\Log;
 
 /**
  * 这里是主机的操作，你可以在这里写任何你想要的操作。
@@ -17,14 +17,14 @@ use App\Models\Host;
 class HostAction extends Action
 {
 
-    public function create(array $requests)
+    /**
+     * @throws HostActionException
+     */
+    public function create(array $requests): Host
     {
         // 价格预留 0.01 可以用来验证用户是否有足够的余额。
         // HostActionException
-        try {
-            $host = $this->createCloudHost(0.01, $requests);
-        } catch (HostActionException $e) {
-        }
+        $host = $this->createCloudHost(0.01, $requests);
 
         /* 这里开始，是创建服务器的逻辑 */
 
