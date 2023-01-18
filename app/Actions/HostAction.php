@@ -4,7 +4,7 @@ namespace App\Actions;
 
 use App\Exceptions\HostActionException;
 use Illuminate\Support\Facades\Log;
-use ivampiresp\Cocoa\Models\Host;
+use App\Models\Host;
 
 /**
  * 这里是主机的操作，你可以在这里写任何你想要的操作。
@@ -20,6 +20,7 @@ class HostAction extends Action
     public function create(array $requests)
     {
         // 价格预留 0.01 可以用来验证用户是否有足够的余额。
+        // HostActionException
         try {
             $host = $this->createCloudHost(0.01, $requests);
         } catch (HostActionException $e) {
@@ -29,7 +30,7 @@ class HostAction extends Action
 
         // 这里需要根据你的业务来写，比如创建数据库，虚拟机，用户等等。
 
-        $task = $this->createTask($host, '创建主机', 'processing');
+        $task = $this->createTask($host, '创建主机');
 
         $this->updateTask($task, '正在寻找服务器。');
         $this->updateTask($task, '正在寻找服务器。');
@@ -62,7 +63,7 @@ class HostAction extends Action
     public function update(Host $host, array $requests)
     {
         // 更新主机也非常简单。
-        $task = $this->createTask($host, '正在应用更改', 'processing');
+        $task = $this->createTask($host, '正在应用更改');
 
         // 这里需要根据你的业务来写，比如更新数据库，虚拟机，用户等等。
 
@@ -116,7 +117,7 @@ class HostAction extends Action
      */
     public function running(Host $host)
     {
-        Log::info('正在开机...');
+        Log::debug('正在开机...', $host->toArray());
         // 启动此主机，比如启动虚拟机，启动数据库等等。
     }
 
