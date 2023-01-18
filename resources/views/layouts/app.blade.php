@@ -36,7 +36,7 @@
                 @auth
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('index') }}">首页</a>
+                            <a class="nav-link" href="{{ route('earnings') }}">首页</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('users.index') }}">客户</a>
@@ -63,9 +63,11 @@
                 <ul class="navbar-nav ms-auto">
                     <!-- Authentication Links -->
                     @guest('admin')
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">登录</a>
-                        </li>
+                        @if (Route::has('login'))
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('login') }}">登录</a>
+                            </li>
+                        @endif
                     @else
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
