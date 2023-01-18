@@ -16,3 +16,4 @@ yarn-error.log
 /.vscode
 .DS_Store
 /packages
+resources/views/.DS_Store
