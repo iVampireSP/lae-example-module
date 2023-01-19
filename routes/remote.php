@@ -3,8 +3,6 @@
 use App\Http\Controllers\Remote\Exports;
 use Illuminate\Support\Facades\Route;
 
-// 注意，以下路由都是暴露给用户的，并且必须经过 'Remote' 中间件，否则这些路由将不安全。
-
 /**
  * Export functions
  * 导出函数，提供给其他模块访问，进行模块联调。
