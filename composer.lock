@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e0eb29228fee72edba9c8d574db8335f",
+    "content-hash": "0724a36c1744efb379fc702aa74e9499",
     "packages": [
         {
             "name": "brick/math",
@@ -1387,16 +1387,16 @@
         },
         {
             "name": "ivampiresp/cocoa",
-            "version": "v0.0.5",
+            "version": "v0.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/iVampireSP/Cocoa.git",
-                "reference": "7cf98ea8f41537c06d1ef67ebfde9562bda24693"
+                "reference": "4b6b9893b1373fa29edb8da34f889202b758d383"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/iVampireSP/Cocoa/zipball/7cf98ea8f41537c06d1ef67ebfde9562bda24693",
-                "reference": "7cf98ea8f41537c06d1ef67ebfde9562bda24693",
+                "url": "https://api.github.com/repos/iVampireSP/Cocoa/zipball/4b6b9893b1373fa29edb8da34f889202b758d383",
+                "reference": "4b6b9893b1373fa29edb8da34f889202b758d383",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -1435,9 +1435,9 @@
             "description": "LAE Module",
             "support": {
                 "issues": "https://github.com/iVampireSP/Cocoa/issues",
-                "source": "https://github.com/iVampireSP/Cocoa/tree/v0.0.5"
+                "source": "https://github.com/iVampireSP/Cocoa/tree/v0.0.6"
             },
-            "time": "2023-01-19T16:31:17+00:00"
+            "time": "2023-01-19T17:14:31+00:00"
         },
         {
             "name": "laravel/framework",

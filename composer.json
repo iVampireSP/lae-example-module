@@ -13,7 +13,7 @@
         "ext-pdo": "*",
         "doctrine/dbal": "^3.5",
         "guzzlehttp/guzzle": "^7.2",
-        "ivampiresp/cocoa": "^v0.0.5",
+        "ivampiresp/cocoa": "^v0.0.6",
         "laravel/framework": "^9.19",
         "laravel/tinker": "^2.7",
         "parsedown/laravel": "^1.2"
