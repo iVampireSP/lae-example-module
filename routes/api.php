@@ -6,14 +6,12 @@ use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
-| API Routes
+| API 路由。这里的路由都经过了封装，它们经过 auth:lae 中间件，从 莱云 获取用户信息并认证。
+| 你只需要将业务逻辑写这边就可以了。
 |--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
 */
 
+// GET your_module.test/api/user
 Route::get('/user', UserController::class);
+
 Route::resource('hosts', HostController::class);

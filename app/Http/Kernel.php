@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\ApiToken;
 use App\Http\Middleware\Authenticate;
 use App\Http\Middleware\CheckModuleIsIpManager;
 use App\Http\Middleware\EncryptCookies;
@@ -93,5 +94,6 @@ class Kernel extends HttpKernel
         'throttle' => ThrottleRequests::class,
         'verified' => EnsureEmailIsVerified::class,
         'check_module_is_ip_manager' => CheckModuleIsIpManager::class,
+        'api.token' => ApiToken::class
     ];
 }
