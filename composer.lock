@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fc51af44924251bea798a887f2fc2ead",
+    "content-hash": "0b78dc07a9c373bdf0598ee64f9b14ab",
     "packages": [
         {
             "name": "brick/math",
@@ -1523,16 +1523,16 @@
         },
         {
             "name": "ivampiresp/cocoa",
-            "version": "v0.0.6",
+            "version": "v0.0.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/iVampireSP/Cocoa.git",
-                "reference": "4b6b9893b1373fa29edb8da34f889202b758d383"
+                "reference": "c9638c43603dcc40d9ff5c4733b4f6d2c2d336fa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/iVampireSP/Cocoa/zipball/4b6b9893b1373fa29edb8da34f889202b758d383",
-                "reference": "4b6b9893b1373fa29edb8da34f889202b758d383",
+                "url": "https://api.github.com/repos/iVampireSP/Cocoa/zipball/c9638c43603dcc40d9ff5c4733b4f6d2c2d336fa",
+                "reference": "c9638c43603dcc40d9ff5c4733b4f6d2c2d336fa",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -1542,6 +1542,7 @@
                 ]
             },
             "require": {
+                "genealabs/laravel-model-caching": "^0.12.5",
                 "laravel/framework": "^8.67|^9.0",
                 "php": "^8.0"
             },
@@ -1571,9 +1572,9 @@
             "description": "LAE Module",
             "support": {
                 "issues": "https://github.com/iVampireSP/Cocoa/issues",
-                "source": "https://github.com/iVampireSP/Cocoa/tree/v0.0.6"
+                "source": "https://github.com/iVampireSP/Cocoa/tree/v0.0.7"
             },
-            "time": "2023-01-19T17:14:31+00:00"
+            "time": "2023-01-19T17:45:37+00:00"
         },
         {
             "name": "laravel/framework",
