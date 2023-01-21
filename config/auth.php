@@ -42,7 +42,7 @@ return [
         ],
 
         'api' => [
-            'driver' => 'lae',
+            'driver' => 'session',
             'provider' => 'users',
         ],
     ],
