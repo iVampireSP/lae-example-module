@@ -24,7 +24,7 @@ class HostAction extends Action
     {
         // 价格预留 0.01 可以用来验证用户是否有足够的余额。
         // HostActionException
-        $host = $this->createCloudHost(0.01, $requests);
+        $host = $this->createCloudHost("0.01", $requests);
 
         /* 这里开始，是创建服务器的逻辑 */
 
@@ -45,7 +45,7 @@ class HostAction extends Action
         /* 你可能还需要计算价格，或者将它放置到 Host 中，当 create 或者 update 时，触发价格更新 */
         // 这里，我们手动指定价格
 
-        $host->price = 100;
+        $host->price = "100";
 
         // 这一步非常重要，在创建成功后，你必须将它设置为 running。
         $host->status = 'running';

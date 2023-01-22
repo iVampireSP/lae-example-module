@@ -45,7 +45,7 @@ class Action
     /**
      * @throws HostActionException
      */
-    public function createCloudHost(float $price, array $data = []): Host
+    public function createCloudHost(string $price, array $data = []): Host
     {
         // 过滤掉不需要的数据
         $data = Arr::except($data, ['id', 'user_id', 'host_id', 'price', 'managed_price', 'suspended_at', 'created_at', 'updated_at']);
