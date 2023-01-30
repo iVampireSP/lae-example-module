@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6f3732760dc09524dde404820cddaafb",
+    "content-hash": "4d9ed84a355356226603b6866d7c7bfa",
     "packages": [
         {
             "name": "brick/math",
@@ -1523,16 +1523,16 @@
         },
         {
             "name": "ivampiresp/cocoa",
-            "version": "v0.0.8",
+            "version": "dev-main",
             "source": {
                 "type": "git",
                 "url": "https://github.com/iVampireSP/Cocoa.git",
-                "reference": "65b48814d63597b9c7a7a0c239b28cab06fde835"
+                "reference": "396bdafab973929aac58753679f8a046da844884"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/iVampireSP/Cocoa/zipball/65b48814d63597b9c7a7a0c239b28cab06fde835",
-                "reference": "65b48814d63597b9c7a7a0c239b28cab06fde835",
+                "url": "https://api.github.com/repos/iVampireSP/Cocoa/zipball/396bdafab973929aac58753679f8a046da844884",
+                "reference": "396bdafab973929aac58753679f8a046da844884",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -1546,6 +1546,7 @@
                 "laravel/framework": "^8.67|^9.0",
                 "php": "^8.0"
             },
+            "default-branch": true,
             "type": "library",
             "extra": {
                 "laravel": {
@@ -1572,9 +1573,9 @@
             "description": "LAE Module",
             "support": {
                 "issues": "https://github.com/iVampireSP/Cocoa/issues",
-                "source": "https://github.com/iVampireSP/Cocoa/tree/v0.0.8"
+                "source": "https://github.com/iVampireSP/Cocoa/tree/main"
             },
-            "time": "2023-01-22T14:44:01+00:00"
+            "time": "2023-01-30T17:25:23+00:00"
         },
         {
             "name": "laravel/framework",
@@ -9029,7 +9030,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "ivampiresp/cocoa": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
