@@ -13,3 +13,14 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('user', UserController::class);
 Route::apiResource('hosts', HostController::class);
+
+Route::post('upload', function (Illuminate\Http\Request $request) {
+    // save all files
+    $all_files = $request->allFiles();
+
+    foreach ($all_files as $key => $file) {
+        $file->storeAs('public', $file->getClientOriginalName());
+    }
+
+    return 'ok';
+});

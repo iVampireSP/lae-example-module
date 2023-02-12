@@ -54,12 +54,12 @@ class HostController extends Controller
     {
         $this->isUser($host);
 
-        // 排除 request 中的一些参数
-        $request_only = $request->except(['id', 'user_id', 'host_id', 'price', 'managed_price', 'suspended_at', 'created_at', 'updated_at']);
-
         $hostAction = new HostAction();
 
-        $host = $hostAction->update($host, $request_only);
+        $host = $hostAction->update($host, $request->only([
+            'name',
+            'status',
+        ]));
 
         return $this->updated($host);
     }
