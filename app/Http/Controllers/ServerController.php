@@ -64,7 +64,7 @@ class ServerController extends Controller
      */
     public function show(Server $server): View
     {
-        return view('Cocoa::servers.show', compact('server'));
+        return view('servers.show', compact('server'));
     }
 
     /**
@@ -76,7 +76,7 @@ class ServerController extends Controller
      */
     public function edit(Server $server): View
     {
-        return view('Cocoa::servers.edit', compact('server'));
+        return view('servers.edit', compact('server'));
     }
 
     /**
