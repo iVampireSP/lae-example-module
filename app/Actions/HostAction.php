@@ -140,4 +140,30 @@ class HostAction extends Action
     public function error(Host $host)
     {
     }
+
+    public function calculatePrice($items = []): string
+    {
+        // items 将会传入一个数组，里面包含了用户购买的所有主机的信息，或者是用户发起的检索费用请求。
+
+        // 价格计算机会在主机创建和更新时被调用。
+        // 你可以自定义价格计算器，但是请切记，使用 bcmath 函数来计算价格，价格必须是字符串类型。
+        $price = "0";
+
+        /* 以下都是例子，请根据自己的需要来。 */
+        // 加法
+        $price = bcadd($price, "1", 2);
+        // 除法
+        $price = bcdiv($price, "2", 2);
+        // 乘法
+        $price = bcmul($price, "2", 2);
+
+        // 判断是否为 0
+        if (bccomp($price, "0", 2) === 0) {
+            // 如果为 0，就返回 0.01
+            return "0.01";
+        }
+        /* 以上都是例子，请根据自己的需要来。 */
+
+        return $price;
+    }
 }
