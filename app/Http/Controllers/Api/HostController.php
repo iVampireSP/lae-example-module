@@ -21,7 +21,12 @@ class HostController extends Controller
     {
         $hostAction = new HostAction();
 
-        $host = $hostAction->create($request->all());
+        $host = $hostAction->create($request->only([
+            'name',
+            'status',
+            'billing_cycle',
+
+        ]));
 
         return $this->created($host);
     }
