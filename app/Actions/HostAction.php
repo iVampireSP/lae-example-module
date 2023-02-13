@@ -22,9 +22,9 @@ class HostAction extends Action
      */
     public function create(array $requests): Host
     {
-        // 价格预留 0.01 可以用来验证用户是否有足够的余额。
+        // 价格预留 0.01 可以用来验证用户是否有足够的余额。如果是周期性计费，则需要一次填写好。
         // HostActionException
-        $host = $this->createCloudHost("0.01", $requests);
+        $host = $this->createCloudHost($this->calculatePrice($requests), $requests);
 
         /* 这里开始，是创建服务器的逻辑 */
 
@@ -147,21 +147,21 @@ class HostAction extends Action
 
         // 价格计算机会在主机创建和更新时被调用。
         // 你可以自定义价格计算器，但是请切记，使用 bcmath 函数来计算价格，价格必须是字符串类型。
-        $price = "0";
+        $price = "5";
 
         /* 以下都是例子，请根据自己的需要来。 */
-        // 加法
-        $price = bcadd($price, "1", 2);
-        // 除法
-        $price = bcdiv($price, "2", 2);
-        // 乘法
-        $price = bcmul($price, "2", 2);
+        // // 加法
+        // $price = bcadd($price, "1", 2);
+        // // 除法
+        // $price = bcdiv($price, "2", 2);
+        // // 乘法
+        // $price = bcmul($price, "2", 2);
 
         // 判断是否为 0
-        if (bccomp($price, "0", 2) === 0) {
-            // 如果为 0，就返回 0.01
-            return "0.01";
-        }
+        // if (bccomp($price, "0", 2) === 0) {
+        //     // 如果为 0，就返回 0.01
+        //     return "0.01";
+        // }
         /* 以上都是例子，请根据自己的需要来。 */
 
         return $price;
