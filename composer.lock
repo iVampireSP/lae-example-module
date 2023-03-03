@@ -1524,16 +1524,16 @@
         },
         {
             "name": "ivampiresp/cocoa",
-            "version": "v0.1.4",
+            "version": "v0.1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/iVampireSP/Cocoa.git",
-                "reference": "875534808b0be8412b1fa57fcafd14d04a2de9e5"
+                "reference": "ad1649508871034bf5cafb619281a6575801187c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/iVampireSP/Cocoa/zipball/875534808b0be8412b1fa57fcafd14d04a2de9e5",
-                "reference": "875534808b0be8412b1fa57fcafd14d04a2de9e5",
+                "url": "https://api.github.com/repos/iVampireSP/Cocoa/zipball/ad1649508871034bf5cafb619281a6575801187c",
+                "reference": "ad1649508871034bf5cafb619281a6575801187c",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -1573,9 +1573,9 @@
             "description": "LAE Module",
             "support": {
                 "issues": "https://github.com/iVampireSP/Cocoa/issues",
-                "source": "https://github.com/iVampireSP/Cocoa/tree/v0.1.4"
+                "source": "https://github.com/iVampireSP/Cocoa/tree/v0.1.5"
             },
-            "time": "2023-03-03T09:11:19+00:00"
+            "time": "2023-03-03T09:16:22+00:00"
         },
         {
             "name": "laravel/framework",
