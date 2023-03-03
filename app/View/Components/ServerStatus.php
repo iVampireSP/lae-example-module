@@ -27,7 +27,7 @@ class ServerStatus extends Component
     public function render(): View
     {
         return view('components.server-status', [
-            'status' => $this->status
+            'status' => $this->status,
         ]);
     }
 }

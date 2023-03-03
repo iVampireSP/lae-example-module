@@ -25,8 +25,7 @@ class ServerController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param Request $request
-     *
+     * @param  Request  $request
      * @return RedirectResponse
      */
     public function store(Request $request): RedirectResponse
@@ -58,8 +57,7 @@ class ServerController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param Server $server
-     *
+     * @param  Server  $server
      * @return View
      */
     public function show(Server $server): View
@@ -70,8 +68,7 @@ class ServerController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param Server $server
-     *
+     * @param  Server  $server
      * @return View
      */
     public function edit(Server $server): View
@@ -82,9 +79,8 @@ class ServerController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param Request $request
-     * @param Server  $server
-     *
+     * @param  Request  $request
+     * @param  Server  $server
      * @return RedirectResponse
      */
     public function update(Request $request, Server $server): RedirectResponse
@@ -104,8 +100,7 @@ class ServerController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param Server $server
-     *
+     * @param  Server  $server
      * @return RedirectResponse
      */
     public function destroy(Server $server): RedirectResponse

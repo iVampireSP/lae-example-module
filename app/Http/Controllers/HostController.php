@@ -14,8 +14,7 @@ class HostController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param Request $request
-     *
+     * @param  Request  $request
      * @return View
      */
     public function index(Request $request): View
@@ -29,7 +28,7 @@ class HostController extends Controller
             }
 
             if ($request->{$key}) {
-                $hosts = $hosts->where($key, 'LIKE', '%' . $value . '%');
+                $hosts = $hosts->where($key, 'LIKE', '%'.$value.'%');
             }
         }
 
@@ -43,8 +42,7 @@ class HostController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param Host $host
-     *
+     * @param  Host  $host
      * @return View
      */
     public function show(Host $host): View
@@ -57,8 +55,7 @@ class HostController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param Host $host
-     *
+     * @param  Host  $host
      * @return View
      */
     public function edit(Host $host): View
@@ -69,9 +66,8 @@ class HostController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param Request $request
-     * @param Host    $host
-     *
+     * @param  Request  $request
+     * @param  Host  $host
      * @return RedirectResponse
      */
     public function update(Request $request, Host $host): RedirectResponse
@@ -84,14 +80,14 @@ class HostController extends Controller
 
         // if status is cost
         if ($request->input('status') == 'cost') {
-            $this->http->patch('hosts/' . $host->host_id, [
+            $this->http->patch('hosts/'.$host->host_id, [
                 'cost_once' => $host->price,
             ]);
+
             return back()->with('success', '已发送扣费请求。');
         }
 
         $host->update($request->only(['status', 'managed_price']));
-
 
         return back()->with('success', '正在执行对应的操作，操作将不会立即生效，因为他需要进行同步。');
     }
@@ -99,8 +95,7 @@ class HostController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param Host $host
-     *
+     * @param  Host  $host
      * @return RedirectResponse
      */
     public function destroy(Host $host): RedirectResponse

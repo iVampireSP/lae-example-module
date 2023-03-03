@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Remote;
 
-use ivampiresp\Cocoa\Http\Controller;
 use App\Models\Server;
+use ivampiresp\Cocoa\Http\Controller;
 
 // use Illuminate\Http\Request;
 

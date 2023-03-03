@@ -14,19 +14,31 @@ class HostController extends Controller
     public function index()
     {
         $hosts = Host::thisUser()->get();
+
         return $this->success($hosts);
     }
 
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required|string',
+            // 'status' => 'required|string',
+        ]);
+
         $hostAction = new HostAction();
 
-        $host = $hostAction->create($request->only([
-            'name',
-            'status',
-            'billing_cycle',
+        $requests = $request->all();
 
-        ]));
+        try {
+            // 价格预留 0.01 可以用来验证用户是否有足够的余额。如果是周期性计费，则需要一次填写好。
+            $host = $hostAction->createCloudHost($hostAction->calculatePrice($requests), [
+                'name' => $request->input('name'),
+                // 'status' => $request->input('status'), 测试用的状态
+                'configuration' => $request->all(), // 保存所有的配置，比如 CPU，硬盘这些，之后队列里面会用到。
+            ]);
+        } catch (HostActionException $e) {
+            return $this->error($e->getMessage());
+        }
 
         return $this->created($host);
     }
@@ -50,9 +62,8 @@ class HostController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param Request $request
-     * @param Host    $host
-     *
+     * @param  Request  $request
+     * @param  Host  $host
      * @return JsonResponse
      */
     public function update(Request $request, Host $host)
@@ -72,8 +83,7 @@ class HostController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param Host $host
-     *
+     * @param  Host  $host
      * @return JsonResponse
      */
     public function destroy(Host $host)
